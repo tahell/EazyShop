@@ -12,10 +12,12 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Location
+    public partial class Products
     {
-        public int Location_Kod { get; set; }
-        public Nullable<double> Value_X { get; set; }
-        public Nullable<double> Value_Y { get; set; }
+        public int Product_Code { get; set; }
+        public string product_name { get; set; }
+        public Nullable<int> Kod_Category { get; set; }
+        public Nullable<int> Location_Code { get; set; }
+        public Nullable<double> Price { get; set; }
     }
 }
