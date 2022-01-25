@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EazyShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Class_Code" />
+          </Key>
+          <Property Name="Class_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Location_Kod" />
+          </Key>
+          <Property Name="Location_Kod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value_X" Type="float" />
+          <Property Name="Value_Y" Type="float" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Product_Code" />
+          </Key>
+          <Property Name="Product_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kod_Category" Type="int" />
+          <Property Name="Location_Code" Type="int" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Products_for_lists">
+          <Key>
+            <PropertyRef Name="Product_Code" />
+          </Key>
+          <Property Name="Product_Code" Type="int" Nullable="false" />
+          <Property Name="Product_code_for_the_list_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod_List" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Reserved_lists">
+          <Key>
+            <PropertyRef Name="List_code" />
+          </Key>
+          <Property Name="List_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Kod" Type="nchar" MaxLength="10" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Name_List" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_Code" />
+          </Key>
+          <Property Name="User_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="EazyShopModelStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Reserved_lists].[List_code] AS [List_code], 
+[Reserved_lists].[User_Kod] AS [User_Kod], 
+[Reserved_lists].[Date] AS [Date], 
+[Reserved_lists].[Name_List] AS [Name_List]
+FROM [dbo].[Reserved_lists] AS [Reserved_lists]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EazyShopModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Class_Code" />
+          </Key>
+          <Property Name="Class_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Location_Kod" />
+          </Key>
+          <Property Name="Location_Kod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value_X" Type="Double" />
+          <Property Name="Value_Y" Type="Double" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Product_Code" />
+          </Key>
+          <Property Name="Product_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kod_Category" Type="Int32" />
+          <Property Name="Location_Code" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+        </EntityType>
+        <EntityType Name="Products_for_lists">
+          <Key>
+            <PropertyRef Name="Product_Code" />
+          </Key>
+          <Property Name="Product_Code" Type="Int32" Nullable="false" />
+          <Property Name="Product_code_for_the_list_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kod_List" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_Code" />
+          </Key>
+          <Property Name="User_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Reserved_lists">
+          <Key>
+            <PropertyRef Name="List_code" />
+          </Key>
+          <Property Name="List_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Kod" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Name_List" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="EazyShopEntities">
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="EazyShopModelStoreContainer" CdmEntityContainer="EazyShopEntities">
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="EazyShopModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Class_Code" ColumnName="Class_Code" />
+                <ScalarProperty Name="Class_Name" ColumnName="Class_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="EazyShopModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Location_Kod" ColumnName="Location_Kod" />
+                <ScalarProperty Name="Value_X" ColumnName="Value_X" />
+                <ScalarProperty Name="Value_Y" ColumnName="Value_Y" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="EazyShopModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="Kod_Category" ColumnName="Kod_Category" />
+                <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products_for_lists">
+            <EntityTypeMapping TypeName="EazyShopModel.Products_for_lists">
+              <MappingFragment StoreEntitySet="Products_for_lists">
+                <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+                <ScalarProperty Name="Product_code_for_the_list_" ColumnName="Product_code_for_the_list_" />
+                <ScalarProperty Name="Kod_List" ColumnName="Kod_List" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EazyShopModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_Code" ColumnName="User_Code" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reserved_lists">
+            <EntityTypeMapping TypeName="EazyShopModel.Reserved_lists">
+              <MappingFragment StoreEntitySet="Reserved_lists">
+                <ScalarProperty Name="List_code" ColumnName="List_code" />
+                <ScalarProperty Name="User_Kod" ColumnName="User_Kod" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name_List" ColumnName="Name_List" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

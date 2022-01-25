@@ -12,10 +12,10 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Location
+    public partial class Users
     {
-        public int Location_Kod { get; set; }
-        public Nullable<double> Value_X { get; set; }
-        public Nullable<double> Value_Y { get; set; }
+        public int User_Code { get; set; }
+        public string User_Name { get; set; }
+        public string Password { get; set; }
     }
 }
