@@ -43,11 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTODepartment.cs" />
+    <Compile Include="DTOLocation.cs" />
+    <Compile Include="DTOProduct.cs" />
+    <Compile Include="DTOProductForList.cs" />
+    <Compile Include="DTOReservedList.cs" />
+    <Compile Include="DTOUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{a203ac19-9499-41ba-87c7-4b103db9acbd}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
