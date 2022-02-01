@@ -38,14 +38,12 @@
           <Property Name="Product_code_for_the_list_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Kod_List" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Reserved_lists">
           <Key>
             <PropertyRef Name="List_code" />
           </Key>
           <Property Name="List_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="User_Kod" Type="nchar" MaxLength="10" />
+          <Property Name="User_Kod" Type="int" />
           <Property Name="Date" Type="datetime" />
           <Property Name="Name_List" Type="nchar" MaxLength="10" />
         </EntityType>
@@ -57,20 +55,93 @@ warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a prima
           <Property Name="User_Name" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Products_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Class_Code" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Kod_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_for_lists_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Products_for_lists" Type="Self.Products_for_lists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_Code" />
+            </Principal>
+            <Dependent Role="Products_for_lists">
+              <PropertyRef Name="Product_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_for_lists_Reserved_lists">
+          <End Role="Reserved_lists" Type="Self.Reserved_lists" Multiplicity="1" />
+          <End Role="Products_for_lists" Type="Self.Products_for_lists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserved_lists">
+              <PropertyRef Name="List_code" />
+            </Principal>
+            <Dependent Role="Products_for_lists">
+              <PropertyRef Name="Product_code_for_the_list_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Location_Kod" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Location_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserved_lists_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Reserved_lists" Type="Self.Reserved_lists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_Code" />
+            </Principal>
+            <Dependent Role="Reserved_lists">
+              <PropertyRef Name="List_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EazyShopModelStoreContainer">
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Reserved_lists].[List_code] AS [List_code], 
-    [Reserved_lists].[User_Kod] AS [User_Kod], 
-    [Reserved_lists].[Date] AS [Date], 
-    [Reserved_lists].[Name_List] AS [Name_List]
-    FROM [dbo].[Reserved_lists] AS [Reserved_lists]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_Products_Department" Association="Self.FK_Products_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_for_lists_Products" Association="Self.FK_Products_for_lists_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products_for_lists" EntitySet="Products_for_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_for_lists_Reserved_lists" Association="Self.FK_Products_for_lists_Reserved_lists">
+            <End Role="Reserved_lists" EntitySet="Reserved_lists" />
+            <End Role="Products_for_lists" EntitySet="Products_for_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Location" Association="Self.FK_Products_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserved_lists_Users" Association="Self.FK_Reserved_lists_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reserved_lists" EntitySet="Reserved_lists" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -83,6 +154,7 @@ warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a prima
           </Key>
           <Property Name="Class_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Class_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Department" FromRole="Department" ToRole="Products" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -91,6 +163,7 @@ warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a prima
           <Property Name="Location_Kod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Value_X" Type="Double" />
           <Property Name="Value_Y" Type="Double" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Location" FromRole="Location" ToRole="Products" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -101,6 +174,9 @@ warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a prima
           <Property Name="Kod_Category" Type="Int32" />
           <Property Name="Location_Code" Type="Int32" />
           <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Products_Department" FromRole="Products" ToRole="Department" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Products_Location" FromRole="Products" ToRole="Location" />
+          <NavigationProperty Name="Products_for_lists" Relationship="Self.FK_Products_for_lists_Products" FromRole="Products" ToRole="Products_for_lists" />
         </EntityType>
         <EntityType Name="Products_for_lists">
           <Key>
@@ -109,6 +185,19 @@ warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a prima
           <Property Name="Product_Code" Type="Int32" Nullable="false" />
           <Property Name="Product_code_for_the_list_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Kod_List" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_for_lists_Products" FromRole="Products_for_lists" ToRole="Products" />
+          <NavigationProperty Name="Reserved_lists" Relationship="Self.FK_Products_for_lists_Reserved_lists" FromRole="Products_for_lists" ToRole="Reserved_lists" />
+        </EntityType>
+        <EntityType Name="Reserved_lists">
+          <Key>
+            <PropertyRef Name="List_code" />
+          </Key>
+          <Property Name="List_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Kod" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Name_List" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Products_for_lists" Relationship="Self.FK_Products_for_lists_Reserved_lists" FromRole="Reserved_lists" ToRole="Products_for_lists" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Reserved_lists_Users" FromRole="Reserved_lists" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -117,23 +206,95 @@ warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a prima
           <Property Name="User_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reserved_lists" Relationship="Self.FK_Reserved_lists_Users" FromRole="Users" ToRole="Reserved_lists" />
         </EntityType>
-        <EntityType Name="Reserved_lists">
-          <Key>
-            <PropertyRef Name="List_code" />
-          </Key>
-          <Property Name="List_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_Kod" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="Name_List" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
+        <Association Name="FK_Products_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Class_Code" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Kod_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Location_Kod" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Location_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_for_lists_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Products_for_lists" Type="Self.Products_for_lists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_Code" />
+            </Principal>
+            <Dependent Role="Products_for_lists">
+              <PropertyRef Name="Product_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_for_lists_Reserved_lists">
+          <End Role="Reserved_lists" Type="Self.Reserved_lists" Multiplicity="1" />
+          <End Role="Products_for_lists" Type="Self.Products_for_lists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserved_lists">
+              <PropertyRef Name="List_code" />
+            </Principal>
+            <Dependent Role="Products_for_lists">
+              <PropertyRef Name="Product_code_for_the_list_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserved_lists_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Reserved_lists" Type="Self.Reserved_lists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_Code" />
+            </Principal>
+            <Dependent Role="Reserved_lists">
+              <PropertyRef Name="List_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EazyShopEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Department" EntityType="Self.Department" />
           <EntitySet Name="Location" EntityType="Self.Location" />
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" />
-          <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Products_Department" Association="Self.FK_Products_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Location" Association="Self.FK_Products_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_for_lists_Products" Association="Self.FK_Products_for_lists_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products_for_lists" EntitySet="Products_for_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_for_lists_Reserved_lists" Association="Self.FK_Products_for_lists_Reserved_lists">
+            <End Role="Reserved_lists" EntitySet="Reserved_lists" />
+            <End Role="Products_for_lists" EntitySet="Products_for_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserved_lists_Users" Association="Self.FK_Reserved_lists_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reserved_lists" EntitySet="Reserved_lists" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -178,15 +339,6 @@ warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="EazyShopModel.Users">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="User_Code" ColumnName="User_Code" />
-                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Reserved_lists">
             <EntityTypeMapping TypeName="EazyShopModel.Reserved_lists">
               <MappingFragment StoreEntitySet="Reserved_lists">
@@ -194,6 +346,15 @@ warning 6002: The table/view 'EazyShop.dbo.Reserved_lists' does not have a prima
                 <ScalarProperty Name="User_Kod" ColumnName="User_Kod" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Name_List" ColumnName="Name_List" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EazyShopModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_Code" ColumnName="User_Code" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

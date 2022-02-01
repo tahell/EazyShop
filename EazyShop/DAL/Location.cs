@@ -14,8 +14,17 @@ namespace DAL
     
     public partial class Location
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Location()
+        {
+            this.Products = new HashSet<Products>();
+        }
+    
         public int Location_Kod { get; set; }
         public Nullable<double> Value_X { get; set; }
         public Nullable<double> Value_Y { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

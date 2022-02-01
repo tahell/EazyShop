@@ -19,5 +19,9 @@ namespace DAL
         public Nullable<int> Kod_Category { get; set; }
         public Nullable<int> Location_Code { get; set; }
         public Nullable<double> Price { get; set; }
+    
+        public virtual Department Department { get; set; }
+        public virtual Location Location { get; set; }
+        public virtual Products_for_lists Products_for_lists { get; set; }
     }
 }

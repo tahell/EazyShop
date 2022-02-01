@@ -29,13 +29,15 @@ namespace DAL
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Products_for_lists> Products_for_lists { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Reserved_lists> Reserved_lists { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
 
         public DbSet<T> GetDbSet<T>() where T : class
         {
             return this.Set<T>();
         }
+
+
 
     }
 }

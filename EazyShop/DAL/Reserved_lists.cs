@@ -14,9 +14,19 @@ namespace DAL
     
     public partial class Reserved_lists
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Reserved_lists()
+        {
+            this.Products_for_lists = new HashSet<Products_for_lists>();
+        }
+    
         public int List_code { get; set; }
-        public string User_Kod { get; set; }
+        public Nullable<int> User_Kod { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public string Name_List { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Products_for_lists> Products_for_lists { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

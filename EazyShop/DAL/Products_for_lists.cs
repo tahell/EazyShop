@@ -17,5 +17,8 @@ namespace DAL
         public int Product_Code { get; set; }
         public int Product_code_for_the_list_ { get; set; }
         public Nullable<int> Kod_List { get; set; }
+    
+        public virtual Products Products { get; set; }
+        public virtual Reserved_lists Reserved_lists { get; set; }
     }
 }
