@@ -18,22 +18,22 @@ namespace DTO
 
         }
 
-        public DTOUser(User u)
+        public DTOUser(Users u)
         {
             this.User_Code = u.User_Code;
             this.User_Name = u.User_Name;
             this.Password = u.Password;
         }
-        public User FromDTOToTable(DTOUser u)
+        public Users FromDTOToTable(DTOUser u)
         {
-            User us = new User();
+            Users us = new Users();
             us.User_Code = u.User_Code;
             us.User_Name = u.User_Name;
             us.Password = u.Password;
             return us;
         }
 
-        public static List<DTOUser> CreatDtoList(List<User> d)
+        public static List<DTOUser> CreatDtoList(List<Users> d)
         {
             List<DTOUser> dtolist = new List<DTOUser>();
             foreach (var c in d)

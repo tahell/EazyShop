@@ -20,26 +20,26 @@ namespace DTO
 
         }
 
-        public DTOProduct(Product r)
+        public DTOProduct(Products r)
         {
-            this.Product_code = r.Product_code;
-            this.Product_Name = r.Product_Name;
+            this.Product_code = r.Product_Code;
+            this.Product_Name = r.product_name;
             this.Kod_Category = (int)r.Kod_Category;
-            this.Location_Kod = (int)r.Location_Kod;
+            this.Location_Kod = (int)r.Location_Code;
 
 
         }
-        public Product FromDTOToTable(DTOProduct u)
+        public Products FromDTOToTable(DTOProduct u)
         {
-            Product us = new Product();
-            us.Product_code = u.Product_code;
-            us.Product_Name = u.Product_Name;
+            Products us = new Products();
+            us.Product_Code = u.Product_code;
+            us.product_name = u.Product_Name;
             us.Kod_Category = u.Kod_Category;
-            us.Location_Kod = u.Location_Kod;
+            us.Location_Code = u.Location_Kod;
             return us;
         }
 
-        public static List<DTOProduct> CreatDtoList(List<Product> d)
+        public static List<DTOProduct> CreatDtoList(List<Products> d)
         {
             List<DTOProduct> dtolist = new List<DTOProduct>();
             foreach (var c in d)

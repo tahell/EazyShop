@@ -4,19 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5e44e031855e4e78981dc8120b7455ec" Name="Diagram1">
-        <EntityTypeShape EntityType="DBModel.Department" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Location" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Products_for_lists" Width="3.375" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Reserved_lists" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.User" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <AssociationConnector Association="DBModel.FK_Products_Departments" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Products_Locations" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Products_for_lists_Products" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Products_for_lists_Reserved_lists" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Reserved_lists_Users" ManuallyRouted="false" />
+      <Diagram DiagramId="d1522f4fca9c46ec8e90578456f45b5f" Name="Diagram1">
+        <EntityTypeShape EntityType="EazyShopModel.Department" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Location" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Products" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Products_for_lists" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Users" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Reserved_lists" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

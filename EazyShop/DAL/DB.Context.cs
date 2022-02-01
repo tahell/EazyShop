@@ -13,10 +13,10 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBEntities : DbContext
+    public partial class EazyShopEntities : DbContext
     {
-        public DBEntities()
-            : base("name=DBEntities")
+        public EazyShopEntities()
+            : base("name=EazyShopEntities")
         {
         }
     
@@ -25,12 +25,17 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Department> Department { get; set; }
+        public virtual DbSet<Location> Location { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Products_for_lists> Products_for_lists { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Reserved_lists> Reserved_lists { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+
+        public DbSet<T> GetDbSet<T>() where T : class
+        {
+            return this.Set<T>();
+        }
+
     }
 }

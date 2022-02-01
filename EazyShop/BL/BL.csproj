@@ -52,7 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="ManagerDepartment.cs" />
+    <Compile Include="ManagerLocation.cs" />
+    <Compile Include="ManagerProduct.cs" />
+    <Compile Include="ManagerProductForList.cs" />
+    <Compile Include="ManagerReservedList.cs" />
     <Compile Include="ManagerUser.cs" />
+    <Compile Include="models\loginForUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
