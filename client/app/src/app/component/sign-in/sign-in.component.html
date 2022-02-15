@@ -1,0 +1,15 @@
+<form >
+    <h1>ברכות </h1>
+    <label for="fn"> הכנס שם משתמש</label>
+    <input type="text" id="fn">
+
+    <label for="pass"> הכנס  סיסמא </label>
+    <input type="text" id="pass">
+
+    <input type="submit" value="אני נרשם">
+
+</form>
+
+
+<input type="button" value="רשומים" (click)="getUser()">
+<p *ngFor="let u of user">{{u}}</p>
