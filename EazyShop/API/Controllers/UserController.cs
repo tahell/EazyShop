@@ -31,9 +31,22 @@ namespace API.Controllers
             return dc;
         }
 
-        // POST: api/User
-        public void Post([FromBody]string value)
+        //register
+        [Route("api/User/RegisterUser")]
+        [HttpPost]
+        public string RegisterUser(DTOUser newUser)
         {
+            DTOUser u = BL.ManagerUser.RegisterUser(newUser);
+
+            return "succes" + "" + u.User_Name;
+        }
+        [Route("api/User/LoginUser")]
+        [HttpPost]
+        public string LoginUsers(string NameU, string PassU)
+        {
+            DTOUser u = BL.ManagerUser.LoginUser( NameU,  PassU);
+
+            return "succes" + "" + u.User_Name;
         }
 
         // PUT: api/User/5

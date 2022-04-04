@@ -1,15 +1,8 @@
-<form >
-    <h1>ברכות </h1>
+<form [formGroup]="SignInForm">
+    
     <label for="fn"> הכנס שם משתמש</label>
-    <input type="text" id="fn">
-
-    <label for="pass"> הכנס  סיסמא </label>
-    <input type="text" id="pass">
-
-    <input type="submit" value="אני נרשם">
-
+    <input formControlName="fn" class="form-control" type="text" id="fn">
+    <label for="pass">הכנס סיסמא</label>
+    <input formControlName="pass" class="form-control" type="text" id="pass">
+    <input class="btn btn-primary" type="submit" value="אני נרשם" (click)="doSignIn()">
 </form>
-
-
-<input type="button" value="רשומים" (click)="getUser()">
-<p *ngFor="let u of user">{{u}}</p>
