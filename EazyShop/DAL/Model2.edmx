@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="EazyShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Columns">
+          <Key>
+            <PropertyRef Name="Kod_Column" />
+          </Key>
+          <Property Name="Kod_Column" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod_Transition" Type="int" />
+          <Property Name="Number_shelves" Type="int" />
+        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="Class_Code" />
@@ -29,6 +37,8 @@
           <Property Name="Kod_Category" Type="int" />
           <Property Name="Location_Code" Type="int" />
           <Property Name="Price" Type="float" />
+          <Property Name="Kod_Column" Type="int" />
+          <Property Name="Shelf_number" Type="int" />
         </EntityType>
         <EntityType Name="Products_for_lists">
           <Key>
@@ -47,6 +57,13 @@
           <Property Name="Date" Type="datetime" />
           <Property Name="Name_List" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Transition">
+          <Key>
+            <PropertyRef Name="Kod_Transition" />
+          </Key>
+          <Property Name="Kod_Transition" Type="int" Nullable="false" />
+          <Property Name="Class_Code" Type="int" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="User_Code" />
@@ -55,6 +72,30 @@
           <Property Name="User_Name" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Columns_Transition">
+          <End Role="Transition" Type="Self.Transition" Multiplicity="0..1" />
+          <End Role="Columns" Type="Self.Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transition">
+              <PropertyRef Name="Kod_Transition" />
+            </Principal>
+            <Dependent Role="Columns">
+              <PropertyRef Name="Kod_Transition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Columns">
+          <End Role="Columns" Type="Self.Columns" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Columns">
+              <PropertyRef Name="Kod_Column" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Kod_Column" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Products_Department">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -115,13 +156,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transition_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Transition" Type="Self.Transition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Class_Code" />
+            </Principal>
+            <Dependent Role="Transition">
+              <PropertyRef Name="Class_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EazyShopModelStoreContainer">
+          <EntitySet Name="Columns" EntityType="Self.Columns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transition" EntityType="Self.Transition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Columns_Transition" Association="Self.FK_Columns_Transition">
+            <End Role="Transition" EntitySet="Transition" />
+            <End Role="Columns" EntitySet="Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Columns" Association="Self.FK_Products_Columns">
+            <End Role="Columns" EntitySet="Columns" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
           <AssociationSet Name="FK_Products_Department" Association="Self.FK_Products_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="Products" EntitySet="Products" />
@@ -142,12 +205,26 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Reserved_lists" EntitySet="Reserved_lists" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transition_Department" Association="Self.FK_Transition_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Transition" EntitySet="Transition" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EazyShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Columns">
+          <Key>
+            <PropertyRef Name="Kod_Column" />
+          </Key>
+          <Property Name="Kod_Column" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kod_Transition" Type="Int32" />
+          <Property Name="Number_shelves" Type="Int32" />
+          <NavigationProperty Name="Transition" Relationship="Self.FK_Columns_Transition" FromRole="Columns" ToRole="Transition" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Columns" FromRole="Columns" ToRole="Products" />
+        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="Class_Code" />
@@ -155,6 +232,7 @@
           <Property Name="Class_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Class_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Department" FromRole="Department" ToRole="Products" />
+          <NavigationProperty Name="Transition" Relationship="Self.FK_Transition_Department" FromRole="Department" ToRole="Transition" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -174,6 +252,9 @@
           <Property Name="Kod_Category" Type="Int32" />
           <Property Name="Location_Code" Type="Int32" />
           <Property Name="Price" Type="Double" />
+          <Property Name="Kod_Column" Type="Int32" />
+          <Property Name="Shelf_number" Type="Int32" />
+          <NavigationProperty Name="Columns" Relationship="Self.FK_Products_Columns" FromRole="Products" ToRole="Columns" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Products_Department" FromRole="Products" ToRole="Department" />
           <NavigationProperty Name="Location" Relationship="Self.FK_Products_Location" FromRole="Products" ToRole="Location" />
           <NavigationProperty Name="Products_for_lists" Relationship="Self.FK_Products_for_lists_Products" FromRole="Products" ToRole="Products_for_lists" />
@@ -199,6 +280,15 @@
           <NavigationProperty Name="Products_for_lists" Relationship="Self.FK_Products_for_lists_Reserved_lists" FromRole="Reserved_lists" ToRole="Products_for_lists" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Reserved_lists_Users" FromRole="Reserved_lists" ToRole="Users" />
         </EntityType>
+        <EntityType Name="Transition">
+          <Key>
+            <PropertyRef Name="Kod_Transition" />
+          </Key>
+          <Property Name="Kod_Transition" Type="Int32" Nullable="false" />
+          <Property Name="Class_Code" Type="Int32" />
+          <NavigationProperty Name="Columns" Relationship="Self.FK_Columns_Transition" FromRole="Transition" ToRole="Columns" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Transition_Department" FromRole="Transition" ToRole="Department" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="User_Code" />
@@ -208,6 +298,30 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Reserved_lists" Relationship="Self.FK_Reserved_lists_Users" FromRole="Users" ToRole="Reserved_lists" />
         </EntityType>
+        <Association Name="FK_Columns_Transition">
+          <End Role="Transition" Type="Self.Transition" Multiplicity="0..1" />
+          <End Role="Columns" Type="Self.Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transition">
+              <PropertyRef Name="Kod_Transition" />
+            </Principal>
+            <Dependent Role="Columns">
+              <PropertyRef Name="Kod_Transition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Columns">
+          <End Role="Columns" Type="Self.Columns" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Columns">
+              <PropertyRef Name="Kod_Column" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Kod_Column" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Products_Department">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -217,6 +331,18 @@
             </Principal>
             <Dependent Role="Products">
               <PropertyRef Name="Kod_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transition_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Transition" Type="Self.Transition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Class_Code" />
+            </Principal>
+            <Dependent Role="Transition">
+              <PropertyRef Name="Class_Code" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -268,16 +394,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EazyShopEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EazyShopEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Columns" EntityType="Self.Columns" />
           <EntitySet Name="Department" EntityType="Self.Department" />
           <EntitySet Name="Location" EntityType="Self.Location" />
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" />
           <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" />
+          <EntitySet Name="Transition" EntityType="Self.Transition" />
           <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Columns_Transition" Association="Self.FK_Columns_Transition">
+            <End Role="Transition" EntitySet="Transition" />
+            <End Role="Columns" EntitySet="Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Columns" Association="Self.FK_Products_Columns">
+            <End Role="Columns" EntitySet="Columns" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
           <AssociationSet Name="FK_Products_Department" Association="Self.FK_Products_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transition_Department" Association="Self.FK_Transition_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Transition" EntitySet="Transition" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Location" Association="Self.FK_Products_Location">
             <End Role="Location" EntitySet="Location" />
@@ -301,7 +441,16 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EazyShopModelStoreContainer" CdmEntityContainer="EazyShopEntities">
+        <EntityContainerMapping StorageEntityContainer="EazyShopModelStoreContainer" CdmEntityContainer="EazyShopEntities1">
+          <EntitySetMapping Name="Columns">
+            <EntityTypeMapping TypeName="EazyShopModel.Columns">
+              <MappingFragment StoreEntitySet="Columns">
+                <ScalarProperty Name="Kod_Column" ColumnName="Kod_Column" />
+                <ScalarProperty Name="Kod_Transition" ColumnName="Kod_Transition" />
+                <ScalarProperty Name="Number_shelves" ColumnName="Number_shelves" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Department">
             <EntityTypeMapping TypeName="EazyShopModel.Department">
               <MappingFragment StoreEntitySet="Department">
@@ -327,6 +476,8 @@
                 <ScalarProperty Name="Kod_Category" ColumnName="Kod_Category" />
                 <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Kod_Column" ColumnName="Kod_Column" />
+                <ScalarProperty Name="Shelf_number" ColumnName="Shelf_number" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -346,6 +497,14 @@
                 <ScalarProperty Name="User_Kod" ColumnName="User_Kod" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Name_List" ColumnName="Name_List" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transition">
+            <EntityTypeMapping TypeName="EazyShopModel.Transition">
+              <MappingFragment StoreEntitySet="Transition">
+                <ScalarProperty Name="Kod_Transition" ColumnName="Kod_Transition" />
+                <ScalarProperty Name="Class_Code" ColumnName="Class_Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

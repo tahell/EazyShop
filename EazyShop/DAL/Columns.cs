@@ -12,21 +12,20 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Department
+    public partial class Columns
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Department()
+        public Columns()
         {
             this.Products = new HashSet<Products>();
-            this.Transition = new HashSet<Transition>();
         }
     
-        public int Class_Code { get; set; }
-        public string Class_Name { get; set; }
+        public int Kod_Column { get; set; }
+        public int Kod_Transition { get; set; }
+        public int Number_shelves { get; set; }
     
+        public virtual Transition Transition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transition> Transition { get; set; }
     }
 }

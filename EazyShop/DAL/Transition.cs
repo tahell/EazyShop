@@ -12,19 +12,19 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class Transition
     {
-        public int Product_Code { get; set; }
-        public string product_name { get; set; }
-        public int Kod_Category { get; set; }
-        public int Location_Code { get; set; }
-        public double Price { get; set; }
-        public int Kod_Column { get; set; }
-        public int Shelf_number { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Transition()
+        {
+            this.Columns = new HashSet<Columns>();
+        }
     
-        public virtual Columns Columns { get; set; }
+        public int Kod_Transition { get; set; }
+        public int Class_Code { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Columns> Columns { get; set; }
         public virtual Department Department { get; set; }
-        public virtual Location Location { get; set; }
-        public virtual Products_for_lists Products_for_lists { get; set; }
     }
 }
