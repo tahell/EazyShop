@@ -1,0 +1,650 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EazyShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Columns">
+          <Key>
+            <PropertyRef Name="Kod_Column" />
+          </Key>
+          <Property Name="Kod_Column" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod_Transition" Type="int" />
+          <Property Name="Number_shelves" Type="int" />
+          <Property Name="StartOrEnd" Type="bit" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Class_Code" />
+          </Key>
+          <Property Name="Class_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Location_Kod" />
+          </Key>
+          <Property Name="Location_Kod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value_X" Type="float" />
+          <Property Name="Value_Y" Type="float" />
+        </EntityType>
+        <EntityType Name="Nodes">
+          <Key>
+            <PropertyRef Name="Node_Kod" />
+          </Key>
+          <Property Name="Node_Kod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Node" Type="nchar" MaxLength="10" />
+          <Property Name="Value_X" Type="int" />
+          <Property Name="Value_Y" Type="int" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Product_Code" />
+          </Key>
+          <Property Name="Product_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kod_Category" Type="int" />
+          <Property Name="Location_Code" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Kod_Column" Type="int" />
+          <Property Name="Shelf_number" Type="int" />
+        </EntityType>
+        <EntityType Name="Products_for_lists">
+          <Key>
+            <PropertyRef Name="Product_Code" />
+          </Key>
+          <Property Name="Product_Code" Type="int" Nullable="false" />
+          <Property Name="Product_code_for_the_list_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod_List" Type="int" />
+        </EntityType>
+        <EntityType Name="Reserved_lists">
+          <Key>
+            <PropertyRef Name="List_code" />
+          </Key>
+          <Property Name="List_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Kod" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Name_List" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Transition">
+          <Key>
+            <PropertyRef Name="Kod_Transition" />
+          </Key>
+          <Property Name="Kod_Transition" Type="int" Nullable="false" />
+          <Property Name="Class_Code" Type="int" />
+          <Property Name="Start_Kod" Type="int" />
+          <Property Name="End_Kod" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_Code" />
+          </Key>
+          <Property Name="User_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Columns_Transition">
+          <End Role="Transition" Type="Self.Transition" Multiplicity="0..1" />
+          <End Role="Columns" Type="Self.Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transition">
+              <PropertyRef Name="Kod_Transition" />
+            </Principal>
+            <Dependent Role="Columns">
+              <PropertyRef Name="Kod_Transition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Columns">
+          <End Role="Columns" Type="Self.Columns" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Columns">
+              <PropertyRef Name="Kod_Column" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Kod_Column" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Class_Code" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Kod_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_for_lists_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Products_for_lists" Type="Self.Products_for_lists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_Code" />
+            </Principal>
+            <Dependent Role="Products_for_lists">
+              <PropertyRef Name="Product_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_for_lists_Reserved_lists">
+          <End Role="Reserved_lists" Type="Self.Reserved_lists" Multiplicity="1" />
+          <End Role="Products_for_lists" Type="Self.Products_for_lists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserved_lists">
+              <PropertyRef Name="List_code" />
+            </Principal>
+            <Dependent Role="Products_for_lists">
+              <PropertyRef Name="Product_code_for_the_list_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Location_Kod" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Location_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserved_lists_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Reserved_lists" Type="Self.Reserved_lists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_Code" />
+            </Principal>
+            <Dependent Role="Reserved_lists">
+              <PropertyRef Name="List_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transition_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Transition" Type="Self.Transition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Class_Code" />
+            </Principal>
+            <Dependent Role="Transition">
+              <PropertyRef Name="Class_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transition_Nodes">
+          <End Role="Nodes" Type="Self.Nodes" Multiplicity="0..1" />
+          <End Role="Transition" Type="Self.Transition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nodes">
+              <PropertyRef Name="Node_Kod" />
+            </Principal>
+            <Dependent Role="Transition">
+              <PropertyRef Name="Start_Kod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transition_Nodes1">
+          <End Role="Nodes" Type="Self.Nodes" Multiplicity="0..1" />
+          <End Role="Transition" Type="Self.Transition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nodes">
+              <PropertyRef Name="Node_Kod" />
+            </Principal>
+            <Dependent Role="Transition">
+              <PropertyRef Name="End_Kod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EazyShopModelStoreContainer">
+          <EntitySet Name="Columns" EntityType="Self.Columns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nodes" EntityType="Self.Nodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transition" EntityType="Self.Transition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Columns_Transition" Association="Self.FK_Columns_Transition">
+            <End Role="Transition" EntitySet="Transition" />
+            <End Role="Columns" EntitySet="Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Columns" Association="Self.FK_Products_Columns">
+            <End Role="Columns" EntitySet="Columns" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Department" Association="Self.FK_Products_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_for_lists_Products" Association="Self.FK_Products_for_lists_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products_for_lists" EntitySet="Products_for_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_for_lists_Reserved_lists" Association="Self.FK_Products_for_lists_Reserved_lists">
+            <End Role="Reserved_lists" EntitySet="Reserved_lists" />
+            <End Role="Products_for_lists" EntitySet="Products_for_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Location" Association="Self.FK_Products_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserved_lists_Users" Association="Self.FK_Reserved_lists_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reserved_lists" EntitySet="Reserved_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transition_Department" Association="Self.FK_Transition_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Transition" EntitySet="Transition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transition_Nodes" Association="Self.FK_Transition_Nodes">
+            <End Role="Nodes" EntitySet="Nodes" />
+            <End Role="Transition" EntitySet="Transition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transition_Nodes1" Association="Self.FK_Transition_Nodes1">
+            <End Role="Nodes" EntitySet="Nodes" />
+            <End Role="Transition" EntitySet="Transition" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EazyShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Columns">
+          <Key>
+            <PropertyRef Name="Kod_Column" />
+          </Key>
+          <Property Name="Kod_Column" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kod_Transition" Type="Int32" />
+          <Property Name="Number_shelves" Type="Int32" />
+          <Property Name="StartOrEnd" Type="Boolean" />
+          <NavigationProperty Name="Transition" Relationship="Self.FK_Columns_Transition" FromRole="Columns" ToRole="Transition" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Columns" FromRole="Columns" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Class_Code" />
+          </Key>
+          <Property Name="Class_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Department" FromRole="Department" ToRole="Products" />
+          <NavigationProperty Name="Transition" Relationship="Self.FK_Transition_Department" FromRole="Department" ToRole="Transition" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Location_Kod" />
+          </Key>
+          <Property Name="Location_Kod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value_X" Type="Double" />
+          <Property Name="Value_Y" Type="Double" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Location" FromRole="Location" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Nodes">
+          <Key>
+            <PropertyRef Name="Node_Kod" />
+          </Key>
+          <Property Name="Node_Kod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Node" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Value_X" Type="Int32" />
+          <Property Name="Value_Y" Type="Int32" />
+          <NavigationProperty Name="Transition" Relationship="Self.FK_Transition_Nodes" FromRole="Nodes" ToRole="Transition" />
+          <NavigationProperty Name="Transition1" Relationship="Self.FK_Transition_Nodes1" FromRole="Nodes" ToRole="Transition" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Product_Code" />
+          </Key>
+          <Property Name="Product_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kod_Category" Type="Int32" />
+          <Property Name="Location_Code" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Kod_Column" Type="Int32" />
+          <Property Name="Shelf_number" Type="Int32" />
+          <NavigationProperty Name="Columns" Relationship="Self.FK_Products_Columns" FromRole="Products" ToRole="Columns" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Products_Department" FromRole="Products" ToRole="Department" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Products_Location" FromRole="Products" ToRole="Location" />
+          <NavigationProperty Name="Products_for_lists" Relationship="Self.FK_Products_for_lists_Products" FromRole="Products" ToRole="Products_for_lists" />
+        </EntityType>
+        <EntityType Name="Products_for_lists">
+          <Key>
+            <PropertyRef Name="Product_Code" />
+          </Key>
+          <Property Name="Product_Code" Type="Int32" Nullable="false" />
+          <Property Name="Product_code_for_the_list_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kod_List" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_for_lists_Products" FromRole="Products_for_lists" ToRole="Products" />
+          <NavigationProperty Name="Reserved_lists" Relationship="Self.FK_Products_for_lists_Reserved_lists" FromRole="Products_for_lists" ToRole="Reserved_lists" />
+        </EntityType>
+        <EntityType Name="Reserved_lists">
+          <Key>
+            <PropertyRef Name="List_code" />
+          </Key>
+          <Property Name="List_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Kod" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Name_List" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Products_for_lists" Relationship="Self.FK_Products_for_lists_Reserved_lists" FromRole="Reserved_lists" ToRole="Products_for_lists" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Reserved_lists_Users" FromRole="Reserved_lists" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Transition">
+          <Key>
+            <PropertyRef Name="Kod_Transition" />
+          </Key>
+          <Property Name="Kod_Transition" Type="Int32" Nullable="false" />
+          <Property Name="Class_Code" Type="Int32" />
+          <Property Name="Start_Kod" Type="Int32" />
+          <Property Name="End_Kod" Type="Int32" />
+          <NavigationProperty Name="Columns" Relationship="Self.FK_Columns_Transition" FromRole="Transition" ToRole="Columns" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Transition_Department" FromRole="Transition" ToRole="Department" />
+          <NavigationProperty Name="Nodes" Relationship="Self.FK_Transition_Nodes" FromRole="Transition" ToRole="Nodes" />
+          <NavigationProperty Name="Nodes1" Relationship="Self.FK_Transition_Nodes1" FromRole="Transition" ToRole="Nodes" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_Code" />
+          </Key>
+          <Property Name="User_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reserved_lists" Relationship="Self.FK_Reserved_lists_Users" FromRole="Users" ToRole="Reserved_lists" />
+        </EntityType>
+        <Association Name="FK_Columns_Transition">
+          <End Role="Transition" Type="Self.Transition" Multiplicity="0..1" />
+          <End Role="Columns" Type="Self.Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transition">
+              <PropertyRef Name="Kod_Transition" />
+            </Principal>
+            <Dependent Role="Columns">
+              <PropertyRef Name="Kod_Transition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Columns">
+          <End Role="Columns" Type="Self.Columns" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Columns">
+              <PropertyRef Name="Kod_Column" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Kod_Column" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Class_Code" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Kod_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transition_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Transition" Type="Self.Transition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Class_Code" />
+            </Principal>
+            <Dependent Role="Transition">
+              <PropertyRef Name="Class_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Location_Kod" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Location_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transition_Nodes">
+          <End Role="Nodes" Type="Self.Nodes" Multiplicity="0..1" />
+          <End Role="Transition" Type="Self.Transition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nodes">
+              <PropertyRef Name="Node_Kod" />
+            </Principal>
+            <Dependent Role="Transition">
+              <PropertyRef Name="Start_Kod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transition_Nodes1">
+          <End Role="Nodes" Type="Self.Nodes" Multiplicity="0..1" />
+          <End Role="Transition" Type="Self.Transition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nodes">
+              <PropertyRef Name="Node_Kod" />
+            </Principal>
+            <Dependent Role="Transition">
+              <PropertyRef Name="End_Kod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_for_lists_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Products_for_lists" Type="Self.Products_for_lists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_Code" />
+            </Principal>
+            <Dependent Role="Products_for_lists">
+              <PropertyRef Name="Product_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_for_lists_Reserved_lists">
+          <End Role="Reserved_lists" Type="Self.Reserved_lists" Multiplicity="1" />
+          <End Role="Products_for_lists" Type="Self.Products_for_lists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserved_lists">
+              <PropertyRef Name="List_code" />
+            </Principal>
+            <Dependent Role="Products_for_lists">
+              <PropertyRef Name="Product_code_for_the_list_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserved_lists_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Reserved_lists" Type="Self.Reserved_lists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_Code" />
+            </Principal>
+            <Dependent Role="Reserved_lists">
+              <PropertyRef Name="List_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EazyShopEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Columns" EntityType="Self.Columns" />
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="Nodes" EntityType="Self.Nodes" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" />
+          <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" />
+          <EntitySet Name="Transition" EntityType="Self.Transition" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Columns_Transition" Association="Self.FK_Columns_Transition">
+            <End Role="Transition" EntitySet="Transition" />
+            <End Role="Columns" EntitySet="Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Columns" Association="Self.FK_Products_Columns">
+            <End Role="Columns" EntitySet="Columns" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Department" Association="Self.FK_Products_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transition_Department" Association="Self.FK_Transition_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Transition" EntitySet="Transition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Location" Association="Self.FK_Products_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transition_Nodes" Association="Self.FK_Transition_Nodes">
+            <End Role="Nodes" EntitySet="Nodes" />
+            <End Role="Transition" EntitySet="Transition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transition_Nodes1" Association="Self.FK_Transition_Nodes1">
+            <End Role="Nodes" EntitySet="Nodes" />
+            <End Role="Transition" EntitySet="Transition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_for_lists_Products" Association="Self.FK_Products_for_lists_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products_for_lists" EntitySet="Products_for_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_for_lists_Reserved_lists" Association="Self.FK_Products_for_lists_Reserved_lists">
+            <End Role="Reserved_lists" EntitySet="Reserved_lists" />
+            <End Role="Products_for_lists" EntitySet="Products_for_lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserved_lists_Users" Association="Self.FK_Reserved_lists_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reserved_lists" EntitySet="Reserved_lists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EazyShopModelStoreContainer" CdmEntityContainer="EazyShopEntities2">
+          <EntitySetMapping Name="Columns">
+            <EntityTypeMapping TypeName="EazyShopModel.Columns">
+              <MappingFragment StoreEntitySet="Columns">
+                <ScalarProperty Name="Kod_Column" ColumnName="Kod_Column" />
+                <ScalarProperty Name="Kod_Transition" ColumnName="Kod_Transition" />
+                <ScalarProperty Name="Number_shelves" ColumnName="Number_shelves" />
+                <ScalarProperty Name="StartOrEnd" ColumnName="StartOrEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="EazyShopModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Class_Code" ColumnName="Class_Code" />
+                <ScalarProperty Name="Class_Name" ColumnName="Class_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="EazyShopModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Location_Kod" ColumnName="Location_Kod" />
+                <ScalarProperty Name="Value_X" ColumnName="Value_X" />
+                <ScalarProperty Name="Value_Y" ColumnName="Value_Y" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nodes">
+            <EntityTypeMapping TypeName="EazyShopModel.Nodes">
+              <MappingFragment StoreEntitySet="Nodes">
+                <ScalarProperty Name="Node_Kod" ColumnName="Node_Kod" />
+                <ScalarProperty Name="Name_Node" ColumnName="Name_Node" />
+                <ScalarProperty Name="Value_X" ColumnName="Value_X" />
+                <ScalarProperty Name="Value_Y" ColumnName="Value_Y" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="EazyShopModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="Kod_Category" ColumnName="Kod_Category" />
+                <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Kod_Column" ColumnName="Kod_Column" />
+                <ScalarProperty Name="Shelf_number" ColumnName="Shelf_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products_for_lists">
+            <EntityTypeMapping TypeName="EazyShopModel.Products_for_lists">
+              <MappingFragment StoreEntitySet="Products_for_lists">
+                <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+                <ScalarProperty Name="Product_code_for_the_list_" ColumnName="Product_code_for_the_list_" />
+                <ScalarProperty Name="Kod_List" ColumnName="Kod_List" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reserved_lists">
+            <EntityTypeMapping TypeName="EazyShopModel.Reserved_lists">
+              <MappingFragment StoreEntitySet="Reserved_lists">
+                <ScalarProperty Name="List_code" ColumnName="List_code" />
+                <ScalarProperty Name="User_Kod" ColumnName="User_Kod" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name_List" ColumnName="Name_List" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transition">
+            <EntityTypeMapping TypeName="EazyShopModel.Transition">
+              <MappingFragment StoreEntitySet="Transition">
+                <ScalarProperty Name="Kod_Transition" ColumnName="Kod_Transition" />
+                <ScalarProperty Name="Class_Code" ColumnName="Class_Code" />
+                <ScalarProperty Name="Start_Kod" ColumnName="Start_Kod" />
+                <ScalarProperty Name="End_Kod" ColumnName="End_Kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EazyShopModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_Code" ColumnName="User_Code" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

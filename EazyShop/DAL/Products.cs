@@ -16,11 +16,11 @@ namespace DAL
     {
         public int Product_Code { get; set; }
         public string product_name { get; set; }
-        public int Kod_Category { get; set; }
-        public int Location_Code { get; set; }
-        public double Price { get; set; }
-        public int Kod_Column { get; set; }
-        public int Shelf_number { get; set; }
+        public Nullable<int> Kod_Category { get; set; }
+        public Nullable<int> Location_Code { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<int> Kod_Column { get; set; }
+        public Nullable<int> Shelf_number { get; set; }
     
         public virtual Columns Columns { get; set; }
         public virtual Department Department { get; set; }

@@ -12,21 +12,23 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Columns
+    public partial class Nodes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Columns()
+        public Nodes()
         {
-            this.Products = new HashSet<Products>();
+            this.Transition = new HashSet<Transition>();
+            this.Transition1 = new HashSet<Transition>();
         }
     
-        public int Kod_Column { get; set; }
-        public Nullable<int> Kod_Transition { get; set; }
-        public Nullable<int> Number_shelves { get; set; }
-        public Nullable<bool> StartOrEnd { get; set; }
+        public int Node_Kod { get; set; }
+        public string Name_Node { get; set; }
+        public Nullable<int> Value_X { get; set; }
+        public Nullable<int> Value_Y { get; set; }
     
-        public virtual Transition Transition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Transition> Transition { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transition> Transition1 { get; set; }
     }
 }
