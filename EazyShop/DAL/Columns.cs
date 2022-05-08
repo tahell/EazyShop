@@ -21,9 +21,9 @@ namespace DAL
         }
     
         public int Kod_Column { get; set; }
-        public Nullable<int> Kod_Transition { get; set; }
-        public Nullable<int> Number_shelves { get; set; }
-        public Nullable<bool> StartOrEnd { get; set; }
+        public int Kod_Transition { get; set; }
+        public int Number_shelves { get; set; }
+        public bool StartOrEnd { get; set; }
     
         public virtual Transition Transition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

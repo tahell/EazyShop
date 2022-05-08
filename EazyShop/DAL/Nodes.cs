@@ -23,8 +23,8 @@ namespace DAL
     
         public int Node_Kod { get; set; }
         public string Name_Node { get; set; }
-        public Nullable<int> Value_X { get; set; }
-        public Nullable<int> Value_Y { get; set; }
+        public int Value_X { get; set; }
+        public int Value_Y { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transition> Transition { get; set; }
