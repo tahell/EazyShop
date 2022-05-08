@@ -31,22 +31,22 @@ namespace BL
             return p;
         }
 
-        public static List<int> Listc(List<Products_for_lists> list_products, List<Products> prod)
-        {
-            List<int> list_colums = new List<int>();
-            foreach(var x in list_products)
-            {
-                var y = db.GetDbSet<Products>().Where(r => r.Product_Code == x.Product_Code).ToList();
-                foreach (var s in y)
-                {
-                    list_colums.Add(s.Kod_Column);
-                }
-            }
-            return list_colums;
+        //public static List<int> Listc(List<Products_for_lists> list_products, List<Products> prod)
+        //{
+        //    List<int> list_colums = new List<int>();
+        //    foreach(var x in list_products)
+        //    {
+        //        var y = db.GetDbSet<Products>().Where(r => r.Product_Code == x.Product_Code).ToList();
+        //        foreach (var s in y)
+        //        {
+        //            list_colums.Add(s.Kod_Column);
+        //        }
+        //    }
+        //    return list_colums;
 
 
 
-        }
+        //}
 
     }
 }

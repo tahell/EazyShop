@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Signup } from 'src/app/model/Sign-Up';
 import { DbService } from 'src/app/services/db.service';
 
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
