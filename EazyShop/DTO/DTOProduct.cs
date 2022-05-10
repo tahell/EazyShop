@@ -28,8 +28,8 @@ namespace DTO
             this.Product_Name = r.product_name;
             this.Kod_Category = (int)r.Kod_Category;
             this.Location_Kod = (int)r.Location_Code;
-            this.Kod_Column = r.Kod_Column;
-            this.Shelf_number = r.Shelf_number;
+            this.Kod_Column = (int)r.Kod_Column;
+            this.Shelf_number = (int)r.Shelf_number;
 
 
         }

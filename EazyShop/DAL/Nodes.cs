@@ -19,16 +19,22 @@ namespace DAL
         {
             this.Transition = new HashSet<Transition>();
             this.Transition1 = new HashSet<Transition>();
+            this.Nodes1 = new HashSet<Nodes>();
+            this.Nodes2 = new HashSet<Nodes>();
         }
     
         public int Node_Kod { get; set; }
         public string Name_Node { get; set; }
-        public int Value_X { get; set; }
-        public int Value_Y { get; set; }
+        public Nullable<int> Value_X { get; set; }
+        public Nullable<int> Value_Y { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transition> Transition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transition> Transition1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Nodes> Nodes1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Nodes> Nodes2 { get; set; }
     }
 }

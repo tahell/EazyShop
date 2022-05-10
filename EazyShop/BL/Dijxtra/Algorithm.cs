@@ -12,19 +12,21 @@ namespace BL.Dijxtra
     {
         static DBConection db = new DBConection();
 
-        public List<DTONodes> CreateShortestRouteOnStore(List<DTOProduct> pl)
+        public static List<object> CreateShortestRouteOnStore(List<DTOProduct> pl)
         {
-            List<DTONodes> DtoNodesList = new List<DTONodes>();
+            List<DTONodes> dtoNodesList = new List<DTONodes>();
             List<Products> productsList = db.GetDbSet<Products>().Where(p => pl.FirstOrDefault(p1 => p1.Product_code == p.Product_Code) != null).ToList();
 
 
             List<Nodes> nodesList = ConvertProductToNodes(productsList);
-            DtoNodesList = CreatDtoList(nodesList);
-            return DtoNodesList;
+
+
+
+            return null;
         }
 
 
-        public List<Nodes> ConvertProductToNodes(List<Products> lp)
+        public static List<Nodes> ConvertProductToNodes(List<Products> lp)
         {
             List<Products> productsList = new List<Products>();
             List<Nodes> nodesList = new List<Nodes>();
@@ -32,7 +34,7 @@ namespace BL.Dijxtra
             foreach (var p in productsList)
             {
                 Nodes node;
-                if (p.Columns.StartOrEnd == false) //התחלה - 1
+                if (p.Columns.Start == 1) //התחלה - 1
                 {
                     node = p.Columns.Transition.Nodes;
                 }
@@ -46,7 +48,35 @@ namespace BL.Dijxtra
             return nodesList;
         }
 
+        public static List<Route> CreateRoute(List<Nodes> ln)
+        {
+           
 
-      
+List<Route> rList = new List<Route>();
+            using (var db = new EazyShopEntities())
+            {
+                ln = db.GetDbSet<Nodes>().ToList();
+
+
+
+                
+                foreach (Nodes node in ln)
+                {
+                    foreach (var otherNode in node.Nodes1)
+                    {
+                        
+                        double x = Math.Sqrt(Math.Pow(Convert.ToDouble(node.Value_X - otherNode.Value_X), 2) + Math.Pow(Convert.ToDouble(node.Value_Y - otherNode.Value_Y), 2));
+                        rList.Add(new Route(node, otherNode, x));
+
+
+                    }
+               
+                }
+            }
+            return rList;
+        }
+
+
+
     }
 }

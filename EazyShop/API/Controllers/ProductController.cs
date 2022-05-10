@@ -19,6 +19,9 @@ namespace API.Controllers
             return P;
         }
 
+        [Route("api/Products/getForCheckCode")]
+        [HttpGet]
+ 
         // GET: api/Product/5
         public string Get(int id)
         {

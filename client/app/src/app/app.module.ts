@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavComponent } from './component/nav/nav.component';
+import { CategoryListComponent } from './component/category-list/category-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    NavComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,

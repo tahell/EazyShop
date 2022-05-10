@@ -13,10 +13,10 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EazyShopEntities3 : DbContext
+    public partial class EazyShopEntities : DbContext
     {
-        public EazyShopEntities3()
-            : base("name=EazyShopEntities3")
+        public EazyShopEntities()
+            : base("name=EazyShopEntities")
         {
         }
     
@@ -32,7 +32,17 @@ namespace DAL
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Products_for_lists> Products_for_lists { get; set; }
         public virtual DbSet<Reserved_lists> Reserved_lists { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Transition> Transition { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+
+
+
+        public DbSet<T> GetDbSet<T>() where T : class
+        {
+            return this.Set<T>();
+        }
+
+
     }
 }

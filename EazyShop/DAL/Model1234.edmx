@@ -12,7 +12,7 @@
           <Property Name="Kod_Column" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Kod_Transition" Type="int" />
           <Property Name="Number_shelves" Type="int" />
-          <Property Name="StartOrEnd" Type="bit" />
+          <Property Name="Start" Type="int" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -28,6 +28,14 @@
           <Property Name="Location_Kod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Value_X" Type="float" />
           <Property Name="Value_Y" Type="float" />
+        </EntityType>
+        <EntityType Name="Neighboring_Nodes">
+          <Key>
+            <PropertyRef Name="Source_Node" />
+            <PropertyRef Name="Destination_Node" />
+          </Key>
+          <Property Name="Source_Node" Type="int" Nullable="false" />
+          <Property Name="Destination_Node" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Nodes">
           <Key>
@@ -67,6 +75,16 @@
           <Property Name="Date" Type="datetime" />
           <Property Name="Name_List" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Transition">
           <Key>
             <PropertyRef Name="Kod_Transition" />
@@ -93,6 +111,30 @@
             </Principal>
             <Dependent Role="Columns">
               <PropertyRef Name="Kod_Transition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Neighboring_Nodes_Nodes">
+          <End Role="Nodes" Type="Self.Nodes" Multiplicity="1" />
+          <End Role="Neighboring_Nodes" Type="Self.Neighboring_Nodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nodes">
+              <PropertyRef Name="Node_Kod" />
+            </Principal>
+            <Dependent Role="Neighboring_Nodes">
+              <PropertyRef Name="Source_Node" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Neighboring_Nodes_Nodes1">
+          <End Role="Nodes" Type="Self.Nodes" Multiplicity="1" />
+          <End Role="Neighboring_Nodes" Type="Self.Neighboring_Nodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nodes">
+              <PropertyRef Name="Node_Kod" />
+            </Principal>
+            <Dependent Role="Neighboring_Nodes">
+              <PropertyRef Name="Destination_Node" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -208,15 +250,25 @@
           <EntitySet Name="Columns" EntityType="Self.Columns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Neighboring_Nodes" EntityType="Self.Neighboring_Nodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nodes" EntityType="Self.Nodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transition" EntityType="Self.Transition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Columns_Transition" Association="Self.FK_Columns_Transition">
             <End Role="Transition" EntitySet="Transition" />
             <End Role="Columns" EntitySet="Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Neighboring_Nodes_Nodes" Association="Self.FK_Neighboring_Nodes_Nodes">
+            <End Role="Nodes" EntitySet="Nodes" />
+            <End Role="Neighboring_Nodes" EntitySet="Neighboring_Nodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Neighboring_Nodes_Nodes1" Association="Self.FK_Neighboring_Nodes_Nodes1">
+            <End Role="Nodes" EntitySet="Nodes" />
+            <End Role="Neighboring_Nodes" EntitySet="Neighboring_Nodes" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Columns" Association="Self.FK_Products_Columns">
             <End Role="Columns" EntitySet="Columns" />
@@ -267,7 +319,7 @@
           <Property Name="Kod_Column" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Kod_Transition" Type="Int32" />
           <Property Name="Number_shelves" Type="Int32" />
-          <Property Name="StartOrEnd" Type="Boolean" />
+          <Property Name="Start" Type="Int32" />
           <NavigationProperty Name="Transition" Relationship="Self.FK_Columns_Transition" FromRole="Columns" ToRole="Transition" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Columns" FromRole="Columns" ToRole="Products" />
         </EntityType>
@@ -299,6 +351,8 @@
           <Property Name="Value_Y" Type="Int32" />
           <NavigationProperty Name="Transition" Relationship="Self.FK_Transition_Nodes" FromRole="Nodes" ToRole="Transition" />
           <NavigationProperty Name="Transition1" Relationship="Self.FK_Transition_Nodes1" FromRole="Nodes" ToRole="Transition" />
+          <NavigationProperty Name="Nodes1" Relationship="Self.Neighboring_Nodes" FromRole="Nodes" ToRole="Nodes1" />
+          <NavigationProperty Name="Nodes2" Relationship="Self.Neighboring_Nodes" FromRole="Nodes1" ToRole="Nodes" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -336,6 +390,16 @@
           <Property Name="Name_List" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Products_for_lists" Relationship="Self.FK_Products_for_lists_Reserved_lists" FromRole="Reserved_lists" ToRole="Products_for_lists" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Reserved_lists_Users" FromRole="Reserved_lists" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Transition">
           <Key>
@@ -479,7 +543,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EazyShopEntities3" annotation:LazyLoadingEnabled="true">
+        <Association Name="Neighboring_Nodes">
+          <End Role="Nodes" Type="Self.Nodes" Multiplicity="*" />
+          <End Role="Nodes1" Type="Self.Nodes" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EazyShopEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Columns" EntityType="Self.Columns" />
           <EntitySet Name="Department" EntityType="Self.Department" />
           <EntitySet Name="Location" EntityType="Self.Location" />
@@ -487,6 +555,7 @@
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="Products_for_lists" EntityType="Self.Products_for_lists" />
           <EntitySet Name="Reserved_lists" EntityType="Self.Reserved_lists" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Transition" EntityType="Self.Transition" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_Columns_Transition" Association="Self.FK_Columns_Transition">
@@ -529,20 +598,24 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Reserved_lists" EntitySet="Reserved_lists" />
           </AssociationSet>
+          <AssociationSet Name="Neighboring_Nodes" Association="Self.Neighboring_Nodes">
+            <End Role="Nodes" EntitySet="Nodes" />
+            <End Role="Nodes1" EntitySet="Nodes" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EazyShopModelStoreContainer" CdmEntityContainer="EazyShopEntities3">
+        <EntityContainerMapping StorageEntityContainer="EazyShopModelStoreContainer" CdmEntityContainer="EazyShopEntities">
           <EntitySetMapping Name="Columns">
             <EntityTypeMapping TypeName="EazyShopModel.Columns">
               <MappingFragment StoreEntitySet="Columns">
                 <ScalarProperty Name="Kod_Column" ColumnName="Kod_Column" />
                 <ScalarProperty Name="Kod_Transition" ColumnName="Kod_Transition" />
                 <ScalarProperty Name="Number_shelves" ColumnName="Number_shelves" />
-                <ScalarProperty Name="StartOrEnd" ColumnName="StartOrEnd" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -605,6 +678,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EazyShopModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Transition">
             <EntityTypeMapping TypeName="EazyShopModel.Transition">
               <MappingFragment StoreEntitySet="Transition">
@@ -624,6 +708,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="Neighboring_Nodes" TypeName="EazyShopModel.Neighboring_Nodes" StoreEntitySet="Neighboring_Nodes">
+            <EndProperty Name="Nodes">
+              <ScalarProperty Name="Node_Kod" ColumnName="Source_Node" />
+            </EndProperty>
+            <EndProperty Name="Nodes1">
+              <ScalarProperty Name="Node_Kod" ColumnName="Destination_Node" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

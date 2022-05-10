@@ -13,6 +13,9 @@ namespace API.Controllers
 
     public class UserController : ApiController
     {
+
+
+
         // GET: api/User
         [Route("api/User/GetUser")]
         [HttpGet]

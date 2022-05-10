@@ -54,58 +54,61 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Columns.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
     <Compile Include="DBConection.cs" />
     <Compile Include="Department.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
     <Compile Include="Location.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model3.Context.cs">
+    <Compile Include="Model1234.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model3.Context.tt</DependentUpon>
+      <DependentUpon>Model1234.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model3.cs">
+    <Compile Include="Model1234.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model3.Designer.cs">
+    <Compile Include="Model1234.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model3.edmx</DependentUpon>
+      <DependentUpon>Model1234.edmx</DependentUpon>
     </Compile>
     <Compile Include="Nodes.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
     <Compile Include="Products.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
     <Compile Include="Products_for_lists.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserved_lists.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
     <Compile Include="Transition.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.cs">
-      <DependentUpon>Model3.tt</DependentUpon>
+      <DependentUpon>Model1234.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Model3.edmx">
+    <EntityDeploy Include="Model1234.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model3.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1234.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model3.edmx.diagram">
-      <DependentUpon>Model3.edmx</DependentUpon>
+    <None Include="Model1234.edmx.diagram">
+      <DependentUpon>Model1234.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -113,15 +116,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model3.Context.tt">
+    <Content Include="Model1234.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model3.edmx</DependentUpon>
-      <LastGenOutput>Model3.Context.cs</LastGenOutput>
+      <DependentUpon>Model1234.edmx</DependentUpon>
+      <LastGenOutput>Model1234.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model3.tt">
+    <Content Include="Model1234.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model3.edmx</DependentUpon>
-      <LastGenOutput>Model3.cs</LastGenOutput>
+      <DependentUpon>Model1234.edmx</DependentUpon>
+      <LastGenOutput>Model1234.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

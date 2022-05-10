@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DbService } from 'src/app/services/db.service';
 import { User } from 'src/app/model/User';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Signin } from 'src/app/model/sign-in';
+import { Signin } from 'src/app/model/Sign-in';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,6 +10,7 @@ import { Signin } from 'src/app/model/sign-in';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+  // SignIusernForm: any;
   SignInForm: any;
   constructor(private db: DbService) { }
 
@@ -21,7 +22,6 @@ export class SignInComponent implements OnInit {
   }
 
   doSignIn() {
-    console.log(this.SignInForm);
     console.log("this.SignInForm.controls.fn.value: "+this.SignInForm.controls.fn.value);
     console.log("this.SignInForm.controls.pass.value: "+this.SignInForm.controls.pass.value);
     

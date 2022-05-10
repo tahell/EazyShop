@@ -1,8 +1,20 @@
-<form [formGroup]="SignInForm">
+<!-- <form [formGroup]="SignInForm">
     
     <label for="fn"> הכנס שם משתמש</label>
     <input formControlName="fn" class="form-control" type="text" id="fn">
     <label for="pass">הכנס סיסמא</label>
     <input formControlName="pass" class="form-control" type="text" id="pass">
     <input class="btn btn-primary" type="submit" value="אני נרשם" (click)="doSignIn()">
+</form> -->
+
+<form [formGroup]="SignInForm">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" formControlName="fn" class="form-control" id="fn" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" formControlName="pass" class="form-control" id="pass">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="doSignIn()">Connect</button>
 </form>

@@ -21,9 +21,9 @@ namespace DAL
         }
     
         public int Kod_Transition { get; set; }
-        public int Class_Code { get; set; }
-        public int Start_Kod { get; set; }
-        public int End_Kod { get; set; }
+        public Nullable<int> Class_Code { get; set; }
+        public Nullable<int> Start_Kod { get; set; }
+        public Nullable<int> End_Kod { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Columns> Columns { get; set; }
