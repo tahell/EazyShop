@@ -8,6 +8,7 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from './component/nav/nav.component';
 import { CategoryListComponent } from './component/category-list/category-list.component';
+import { HomeComponent } from './component/home/home.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CategoryListComponent } from './component/category-list/category-list.c
     SignInComponent,
     SignUpComponent,
     NavComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
