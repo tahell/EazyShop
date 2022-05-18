@@ -1,2 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DTO.DTOColumns">
+    <Position X="5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACAACAAAAAAAAAIgAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTOColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DTO.DTODepartment">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAABAAAACAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>DTODepartment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DTO.DTONodes">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABADAADAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>DTONodes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DTO.DTOProduct">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAQIACAAAAQAAAIIAAAAIAAAAABAAAAAAAAA=</HashCode>
+      <FileName>DTOProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DTO.DTOProductForList">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAIACAAAAAAAAAAAAAAQAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>DTOProductForList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DTO.DTOTranition">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAACABAAACCAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTOTranition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DTO.DTOUser">
+    <Position X="1.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAACAAAAAAAAAAAAAAAAIQCAAAAAAAAAAA=</HashCode>
+      <FileName>DTOUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

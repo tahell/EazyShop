@@ -7,7 +7,7 @@
     <input class="btn btn-primary" type="submit" value="אני נרשם" (click)="doSignIn()">
 </form> -->
 
-<form [formGroup]="SignInForm">
+<!-- <form [formGroup]="SignInForm">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input type="email" formControlName="fn" class="form-control" id="fn" aria-describedby="emailHelp">
@@ -17,4 +17,42 @@
         <input type="password" formControlName="pass" class="form-control" id="pass">
     </div>
     <button type="submit" class="btn btn-primary" (click)="doSignIn()">Connect</button>
-</form>
+</form> -->
+
+<div id="from">
+<form class="row gy-2 gx-3 align-items-center">
+    <div class="col-auto">
+        <label for="fn"> Username</label>
+      <!-- <label class="visually-hidden" for="autoSizingInput">Name</label> -->
+      <input type="text" class="form-control" id="autoSizingInput" placeholder="Jane Doe">
+    </div>
+    <div class="col-auto">
+      <label for="pass">Password</label>
+      <!-- <label class="visually-hidden" for="autoSizingInputGroup">Username</label> -->
+      <div class="input-group">
+        <div class="input-group-text"></div>
+        <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Password">
+      </div>
+    </div>
+    <div class="col-auto">
+        <label for="pass">Choose</label> 
+      <label class="visually-hidden" for="autoSizingSelect">Preference</label>
+      <select class="form-select" id="autoSizingSelect">
+        <option selected>Choose...</option>
+        <option value="Customer">Customer</option>
+        <option value="Collector">Collector</option>
+      
+      </select>
+    </div>
+    <div class="col-auto">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+        <label class="form-check-label" for="autoSizingCheck">
+          Remember me
+        </label>
+      </div>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form></div>

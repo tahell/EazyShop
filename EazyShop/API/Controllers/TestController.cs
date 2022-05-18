@@ -13,11 +13,11 @@ namespace API.Controllers
 
         [Route("api/Test/Test")]
         [HttpGet]
-        public IEnumerable<string> Test()
-        {
-            BL.Dijxtra.Algorithm.CreateRoute(null);
-            return new string[] { "value1", "value2" };
-        }
+        //public IEnumerable<string> Test()
+        //{
+        //    BL.Dijxtra.Algorithm.CreateRoute(null);
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET: api/Test/5
         public string Get(int id)

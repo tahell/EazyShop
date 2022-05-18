@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Dijxtra\Algorithm.cs" />
+    <Compile Include="Dijxtra\Queue.cs" />
     <Compile Include="Dijxtra\Route.cs" />
     <Compile Include="ManagerDepartment.cs" />
     <Compile Include="ManagerLocation.cs" />
