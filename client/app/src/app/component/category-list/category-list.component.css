@@ -4,3 +4,11 @@
 #revach{
     margin-bottom: 20px;
 }
+#item{
+    font-family: unset;
+    margin: 15px;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    border-color: black;
+}
