@@ -13,22 +13,16 @@ import { Category } from '../model/Category';
 export class DbService {
 
   constructor(private httpClient: HttpClient) { }
-  Sign(sign: Signin): Observable<Signin> {
-    return this.httpClient.post<Signin>("http://localhost:51399/api/user/RegisterUser", sign)
+  SignIn(signup: Signup): Observable<Signin> {
+    return this.httpClient.post<Signin>("http://localhost:51399/api/user/RegisterUser", signup)
   }
 
-
-  Signu(Signu: Signup): Observable<Signup> {
-    return this.httpClient.post<Signup>("http://localhost:51399/api/User/LoginUser", Signu)
+  SignUp(signIn: Signin): Observable<string> {
+    return this.httpClient.post<string>("http://localhost:51399/api/User/LoginUser", signIn)
   }
-getAllProducts(CatClass:number){
-  
-    return this.httpClient.post<Category[]>("http://localhost:51399/api/Surgery/GetDepartmentAccordingCode",CatClass)
- 
-}
 
-
-
-
+  getAllProducts(CatClass: number) {
+    return this.httpClient.post<Category[]>("http://localhost:51399/api/Surgery/GetDepartmentAccordingCode", CatClass)
+  }
 
 }

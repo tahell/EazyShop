@@ -14,6 +14,7 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   showCategory(){
     console.log(this.selectedCategory)
      this.db.getAllProducts(Number.parseInt(this.selectedCategory)).subscribe(res =>{

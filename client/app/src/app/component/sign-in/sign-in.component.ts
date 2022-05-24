@@ -22,16 +22,16 @@ export class SignInComponent implements OnInit {
   }
 
   doSignIn() {
-    console.log("this.SignInForm.controls.fn.value: "+this.SignInForm.controls.fn.value);
-    console.log("this.SignInForm.controls.pass.value: "+this.SignInForm.controls.pass.value);
-    
+    console.log("this.SignInForm.controls.fn.value: " + this.SignInForm.controls.fn.value);
+    console.log("this.SignInForm.controls.pass.value: " + this.SignInForm.controls.pass.value);
+
     const signin: Signin = {
       User_Name: this.SignInForm.controls.fn.value,
       Password: this.SignInForm.controls.pass.value,
     }
-    console.log("signin: "+signin);
+    console.log("signin: " + signin);
 
-    this.db.Sign(signin).subscribe(res => {
+    this.db.SignIn(signin).subscribe(res => {
       console.log(res)
 
       if (res == null)

@@ -18,13 +18,13 @@ namespace BL
             return dtolist; 
         }
 
-        public static DTOUser LoginUser(string NameU,string PassU)
+        public static DTOUser LoginUser(DTOUser user)
         {
             List<DTOUser> UserInDB = GetUsers();
-            DTOUser us = UserInDB.FirstOrDefault(s => s.User_Name.Equals(NameU));
+            DTOUser us = UserInDB.FirstOrDefault(s => s.User_Name.Equals(user.User_Name) && s.Password.Equals(user.Password));
             if (us == null)
                 return null;
-            else if (us.Password != PassU)
+            else if (us.Password != user.Password)
                 return null;
             return us;
         }

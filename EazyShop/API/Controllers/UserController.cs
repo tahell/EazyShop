@@ -12,9 +12,7 @@ namespace API.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
 
     public class UserController : ApiController
-    {
-
-
+    { 
 
         // GET: api/User
         [Route("api/User/GetUser")]
@@ -41,15 +39,14 @@ namespace API.Controllers
         {
             DTOUser u = BL.ManagerUser.RegisterUser(newUser);
 
-            return "succes" + "" + u.User_Name;
+            return "success" + " " + u.User_Name;
         }
         [Route("api/User/LoginUser")]
         [HttpPost]
-        public string LoginUsers(string NameU, string PassU)
+        public string LoginUsers([FromBody] DTOUser user)
         {
-            DTOUser u = BL.ManagerUser.LoginUser( NameU,  PassU);
-
-            return "succes" + "" + u.User_Name;
+            DTOUser u = BL.ManagerUser.LoginUser(user);
+            return "success" + " " + u.User_Name;
         }
 
         // PUT: api/User/5
