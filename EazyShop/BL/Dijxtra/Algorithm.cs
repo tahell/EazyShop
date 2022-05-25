@@ -8,17 +8,46 @@ using System.Threading.Tasks;
 //using BL.Dijxtra;
 
 namespace BL.Dijxtra
-{
+{ public class product_node
+        {
+            public Products product { get; set; }
+            public Nodes node { get; set; }
+
+        }
+        public class List_productNode
+        {
+            public List<product_node> list = new List<product_node>();
+            
+
+            public void Add(Products p,Nodes n)
+            {
+                list.Add(new product_node() { product = p, node = n });
+            }
+
+            public Products getProduct(Nodes n)
+            {
+                Products i = list.Find(x => x.node.Node_Kod == n.Node_Kod).product;
+                return i;
+            }
+
+            public Nodes getNode(Products i)
+            {
+                Nodes code = list.Find(x => x.product.Product_Code == i.Product_Code).node;
+                return code;
+            }
+
+        }
+
     public class Dijxtra
     {
-        
-        static DBConection db = new DBConection();
+       
+    static DBConection db = new DBConection();
 
         public static List<object> CreateShortestRouteOnStore(List<DTOProduct> pl)
         {
 
             //  באתחול לבנות רשימת צמתים של כל הסופר בכללי 
-            List<Nodes> superNODES= new List<Nodes>();
+            List_productNode superNODES = new List_productNode();
             //
 
 
@@ -29,20 +58,24 @@ namespace BL.Dijxtra
 
             //רשימת המצתים  מאותחלת ללרשימה שהלקוח מעונין לעבור בה של המסלול שצריך להחזיר  1 
             superNODES = ConvertProductToNodes(productsList);
+            List<Nodes> nodes = superNODES.list.Select(x => x.node).ToList();
             //2 רשימת קשתות אתחול 
             List<Route> routesList = new List<Route>();
-            routesList = CreateRoute(superNODES);
+            routesList = CreateRoute(nodes);
+
+            //חישוב מטריצת מרחקים
+            Cell[,] matrix = DijkstraFunction.ComputeDikjstra(nodes, routesList);
 
 
             return null;
         }
 
 
-        public static List<Nodes> ConvertProductToNodes(List<Products> lp)
+        public static List_productNode ConvertProductToNodes(List<Products> lp)
         {
             List<Products> productsList = new List<Products>();
             List<Nodes> nodesList = new List<Nodes>();
-
+        List_productNode List_productNode = new List_productNode(); ;
             foreach (var p in productsList)
             {
                 Nodes node;
@@ -55,9 +88,10 @@ namespace BL.Dijxtra
                     node = p.Columns.Transition.Nodes1;
                 }
                 nodesList.Add(node);
+                List_productNode.Add(p, node);
             }
 
-            return nodesList;
+            return List_productNode;
         }
 
         public static List<Route> CreateRoute(List<Nodes> ln)
