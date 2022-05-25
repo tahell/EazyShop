@@ -6,40 +6,27 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
-
+using BL;
 namespace API.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DepartmentController : ApiController
     {
         // GET: api/Department
-        [Route("api/Department/GetDepartmentAccordingCode")]
+        [Route("api/Department/GetDepartmentAccordingCode/{CategoryNum}")]
         [HttpGet]
         public List<DTOProduct> GetDepartmentAccordingCode(int CategoryNum)
         {
-            List<DTOProduct> s = BL.ManagerDepartment.GetDepartmentAccordingCode(CategoryNum);
+            List<DTOProduct> s = ManagerDepartment.GetDepartmentAccordingCode(CategoryNum);
             return s;
         }
 
-        // GET: api/Department/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST: api/Department
-        public void Post([FromBody]string value)
+        [Route("api/Department/GetAllDepartments")]
+        [HttpGet]
+        public List<DTODepartment> GetDTODepartments()
         {
-        }
-
-        // PUT: api/Department/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Department/5
-        public void Delete(int id)
-        {
+             return ManagerDepartment.GetDepartment();
         }
     }
 }

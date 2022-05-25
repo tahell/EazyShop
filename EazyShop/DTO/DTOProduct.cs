@@ -27,7 +27,10 @@ namespace DTO
             this.Product_code = r.Product_Code;
             this.Product_Name = r.product_name;
             this.Kod_Category = (int)r.Kod_Category;
-            this.Location_Kod = (int)r.Location_Code;
+            //  this.Location_Kod = (int)r.Location_Code;
+
+            this.Price = (int)r.Price;
+            this.Location_Kod = 0;
             this.Kod_Column = (int)r.Kod_Column;
             this.Shelf_number = (int)r.Shelf_number;
 

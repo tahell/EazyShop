@@ -36,44 +36,53 @@
 
 
 <div id="buttonCatagory">
- <button id="item" type="button" class="btn btn-outline-info" value="22">שמפו</button>
-<button  id="item" type="button" class="btn btn-outline-info" value="23">אבקת כביסה </button>
-<button  id="item" type="button" class="btn btn-outline-info" value="24">מרכך כביסה</button>
-<button  id="item" type="button" class="btn btn-outline-info" value="25">ניקיון</button>
-<br> <div id="revach"></div>
-<button  id="item" type="button" class="btn btn-outline-info" value="26">נוזל רצפות</button>
-<button  id="item" type="button" class="btn btn-outline-info" value="27">משלימים</button>
-<button  id="item" type="button" class="btn btn-outline-info" value="28">נייר</button>
-<button  id="item" type="button" class="btn btn-outline-info" value="29">היגיינה</button>
-<br><div id="revach"></div>
-<button  id="item" type="button" class="btn btn-outline-info" value="31">חד פעמי</button>
-<button  id="item" type="button" class="btn btn-outline-info" value="34">לתינוק</button>
-<button  id="item" type="button" class="btn btn-outline-info" value="35">חטיפים</button>
-<button id="item" type="button" class="btn btn-outline-info" value="37">שתיה</button>
-<br><div id="revach"></div>
-<button  id="item" type="button" class="btn btn-outline-info" value="38">ממרחים</button>
-<button id="item" type="button" class="btn btn-outline-info" value="39">פרכיות</button>
-<button id="item"  type="button" class="btn btn-outline-info" value="40">עוגות</button>
-<button id="item" type="button" class="btn btn-outline-info" value="41">עוגיות</button>
-<br><div id="revach"></div>
-<button id="item" type="button" class="btn btn-outline-info" value="42">מתוקים</button>
-<button id="item" type="button" class="btn btn-outline-info" value="43">מתוקים</button>
-<button id="item" type="button" class="btn btn-outline-info" value="44">מרקים</button>
-<button id="item" type="button" class="btn btn-outline-info" value="45">פסטות</button>
-<br><div id="revach"></div>
-<button id="item" type="button" class="btn btn-outline-info" value="46">אפייה</button>
-<button id="item" type="button" class="btn btn-outline-info" value="47">בשר</button>
-<button  id="item" type="button" class="btn btn-outline-info" value="48">עופות</button>
-<button id="item" type="button" class="btn btn-outline-info" value="49">דגים</button>
-<br><div id="revach"></div>
-<button id="item" type="button" class="btn btn-outline-info" value="50">פירות</button>
-<button id="item" type="button" class="btn btn-outline-info" value="51">ירקות</button>
-<button id="item" type="button" class="btn btn-outline-info" value="52">מוצרי חלב</button>
-<button id="item"  type="button" class="btn btn-outline-info" value="53">שימורים</button>
-<br><div id="revach"></div>
-<button id="item" type="button" class="btn btn-outline-info" value="54">דגני בוקר</button> 
-<button id="item" type="button" class="btn btn-outline-info" value="55">לחמים</button>
-<button id="item" type="button" class="btn btn-outline-info" value="56">קפואים</button>
+
+<input *ngFor="let category of allCategories " type="button" (click)="showProducts($event)" [id]="category.Class_Code" [value]="category.Class_Name.trim()"  class="btn btn-outline-info item">
+    
+    <!-- <button id="item" type="button" class="btn btn-outline-info" value="22">שמפו</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="23">אבקת כביסה </button>
+    <button id="item" type="button" class="btn btn-outline-info" value="24">מרכך כביסה</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="25">ניקיון</button>
+    <br>
+    <div id="revach"></div>
+    <button id="item" type="button" class="btn btn-outline-info" value="26">נוזל רצפות</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="27">משלימים</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="28">נייר</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="29">היגיינה</button>
+    <br>
+    <div id="revach"></div>
+    <button id="item" type="button" class="btn btn-outline-info" value="31">חד פעמי</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="34">לתינוק</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="35">חטיפים</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="37">שתיה</button>
+    <br>
+    <div id="revach"></div>
+    <button id="item" type="button" class="btn btn-outline-info" value="38">ממרחים</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="39">פרכיות</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="40">עוגות</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="41">עוגיות</button>
+    <br>
+    <div id="revach"></div>
+    <button id="item" type="button" class="btn btn-outline-info" value="42">מתוקים</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="43">מתוקים</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="44">מרקים</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="45">פסטות</button>
+    <br>
+    <div id="revach"></div>
+    <button id="item" type="button" class="btn btn-outline-info" value="46">אפייה</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="47">בשר</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="48">עופות</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="49">דגים</button>
+    <br>
+    <div id="revach"></div>
+    <button id="item" type="button" class="btn btn-outline-info" value="50">פירות</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="51">ירקות</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="52">מוצרי חלב</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="53">שימורים</button>
+    <br>
+    <div id="revach"></div>
+    <button id="item" type="button" class="btn btn-outline-info" value="54">דגני בוקר</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="55">לחמים</button>
+    <button id="item" type="button" class="btn btn-outline-info" value="56">קפואים</button> -->
 
 </div>
- 

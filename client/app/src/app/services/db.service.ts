@@ -5,12 +5,15 @@ import { Observable } from 'rxjs';
 import { Signup } from '../model/Sign-Up';
 import { Signin } from '../model/Sign-in'
 import { Category } from '../model/Category';
+import { Product } from '../model/Product';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbService {
+
+  public allProducts:Product[]=[]
 
   constructor(private httpClient: HttpClient) { }
   SignIn(signup: Signup): Observable<Signin> {
@@ -22,7 +25,10 @@ export class DbService {
   }
 
   getAllProducts(CatClass: number) {
-    return this.httpClient.post<Category[]>("http://localhost:51399/api/Surgery/GetDepartmentAccordingCode", CatClass)
+    return this.httpClient.get<Product[]>("http://localhost:51399/api/Department/GetDepartmentAccordingCode/"+ CatClass)
   }
-
+  getAllCategories() {
+    return this.httpClient.get<Category[]>("http://localhost:51399/api/Department/GetAllDepartments")
+  }
+  
 }

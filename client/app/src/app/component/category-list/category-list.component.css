@@ -1,14 +1,18 @@
-#buttonCatagory{
+#buttonCatagory {
     text-align: center;
 }
-#revach{
+
+#revach {
     margin-bottom: 20px;
 }
-#item{
+
+.item {
     font-family: unset;
     margin: 15px;
+    padding: 1%;
     color: white;
     font-weight: bold;
-    background-color: black;
-    border-color: black;
+    background-color: #647676;
+    border-color: aliceblue;
+
 }
