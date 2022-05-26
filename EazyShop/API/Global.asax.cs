@@ -1,4 +1,7 @@
-﻿using System;
+﻿using API.Controllers;
+using BL.Dijxtra;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +21,14 @@ namespace API
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //List<product_node> RE = new List<product_node>();
+            //DepartmentController y = new DepartmentController();
+            //RE = CreateShortestRouteOnStore(y.GetDepartmentAccordingCode(3));
         }
+
+        //private List<product_node> CreateShortestRouteOnStore(List<DTOProduct> list)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

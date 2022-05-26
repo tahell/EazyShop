@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public static class ManagerDepartment
+    public  class ManagerDepartment
     {
         static DBConection db = new DBConection();
         public static List<DTODepartment> GetDepartment()

@@ -30,7 +30,7 @@ export class CategoryListComponent implements OnInit {
 
   showProducts(event:any) {
 
-    console.log(  event.target.id)
+    console.log(event.target.id)
 
     this.selectedCategory=this.allCategories.filter(c=>c.Class_Code==event.target.id)[0];
     console.log(this.selectedCategory);

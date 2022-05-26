@@ -35,7 +35,7 @@
 <button (click)="showCategory()" >OK</button> -->
 
 
-<div id="buttonCatagory">
+<div id="">
 
 <input *ngFor="let category of allCategories " type="button" (click)="showProducts($event)" [id]="category.Class_Code" [value]="category.Class_Name.trim()"  class="btn btn-outline-info item">
     

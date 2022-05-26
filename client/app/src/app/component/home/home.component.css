@@ -95,12 +95,13 @@ p{
     letter-spacing: 2px;
 }
 .img{
-    position: relative;
+    position:fixed;
     top: 0px;
     left: 89%;
     height: 70px;
     position: sticky;
     width: 11%;
+
 }
 
 .img2{

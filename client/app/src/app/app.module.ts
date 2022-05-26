@@ -12,6 +12,7 @@ import { HomeComponent } from './component/home/home.component';
 import { AboutComponent } from './about/about.component';
 import { AllProductsComponent } from './component/all-products/all-products.component';
 import { ProductComponent } from './component/product/product.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ProductComponent } from './component/product/product.component';
     HomeComponent,
     AboutComponent,
     AllProductsComponent,
-    ProductComponent
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +34,8 @@ import { ProductComponent } from './component/product/product.component';
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule],
+
 })
 export class AppModule { }

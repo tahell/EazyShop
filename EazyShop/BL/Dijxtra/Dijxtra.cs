@@ -116,8 +116,9 @@ namespace BL.Dijxtra
 
             foreach (var item in connections)
             {
-                int src = Convert.ToInt32(item.source);
-                int dest = Convert.ToInt32(item.destination);
+                //הוספה של קוד ספציפי למקור
+                int src = Convert.ToInt32(item.source.Node_Kod);
+                int dest = Convert.ToInt32(item.destination.Node_Kod);
                 int Isrc = list_ICode.getI(src);
                 int Idest = list_ICode.getI(dest);
                 double distance = item.value;

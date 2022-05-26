@@ -10,6 +10,7 @@ namespace API.Controllers
 {
     public class ProductController : ApiController
     {
+        
         [Route("api/Products/GetProducts")]
         [HttpGet]
         // GET: api/Product
