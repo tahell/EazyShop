@@ -5,16 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c5a5310297a344eabcf8149f34a65c43" Name="Diagram1">
-        <EntityTypeShape EntityType="EazyShopModel.Columns" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Department" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Location" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Nodes" Width="1.5" PointX="3.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Products" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Products_for_lists" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Reserved_lists" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Transition" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Users" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Columns" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Department" Width="1.5" PointX="1" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Location" Width="1.5" PointX="1" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Nodes" Width="1.5" PointX="3.375" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Products" Width="1.5" PointX="3.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Products_for_lists" Width="1.5" PointX="5.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Reserved_lists" Width="1.5" PointX="7.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.sysdiagrams" Width="1.5" PointX="0.625" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Transition" Width="1.5" PointX="5.625" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Users" Width="1.5" PointX="9.625" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="EazyShopModel.FK_Columns_Transition" ManuallyRouted="false" />
         <AssociationConnector Association="EazyShopModel.FK_Products_Columns" ManuallyRouted="false" />
         <AssociationConnector Association="EazyShopModel.FK_Products_Department" ManuallyRouted="false" />

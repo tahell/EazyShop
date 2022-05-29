@@ -76,7 +76,6 @@ namespace BL.Dijxtra
 
         public static List_productNode ConvertProductToNodes(List<Products> lp)
         {
-            //מקבל רשימה ריקה ורץ עליה?? למה?? 
             List<Products> productsList = new List<Products>();
             List<Nodes> nodesList = new List<Nodes>();
         List_productNode List_productNode = new List_productNode(); ;
@@ -111,7 +110,8 @@ namespace BL.Dijxtra
                     foreach (var otherNode in node.Nodes1)
                     {
 
-                        double x = Math.Sqrt(Math.Pow(Convert.ToDouble(node.Value_X - otherNode.Value_X), 2) + Math.Pow(Convert.ToDouble(node.Value_Y - otherNode.Value_Y), 2));
+                        double x = Math.Sqrt(Math.Pow(Convert.ToDouble(node.Value_X - otherNode.Value_X), 2) +
+                            Math.Pow(Convert.ToDouble(node.Value_Y - otherNode.Value_Y), 2));
                         rList.Add(new Route(node, otherNode, x));
 
 
