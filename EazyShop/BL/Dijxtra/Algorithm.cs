@@ -69,7 +69,10 @@ namespace BL.Dijxtra
                 List<Nodes> superNodes = db.GetDbSet<Nodes>().ToList();
                 //חישוב מטריצת מרחקים
                 Cell[,] matrix = DijkstraFunction.ComputeDikjstra(superNodes, routesList);
-             
+                //OurTsp(matrix, bool[] visited, int currPos,
+                //                        int lenMat, int count, int cost, int ans, int[] ResultIndexes, int[] arr, bool approx, int dest);
+
+
 
             }
             return null;

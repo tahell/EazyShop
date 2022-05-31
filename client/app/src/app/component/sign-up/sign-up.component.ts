@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Signup } from 'src/app/model/Sign-Up';
 import { User } from 'src/app/model/User';
 import { DbService } from 'src/app/services/db.service';
@@ -13,7 +14,7 @@ import { DbService } from 'src/app/services/db.service';
 export class SignUpComponent implements OnInit {
   SignUpForm: any;
 
-  constructor(private db: DbService) { }
+  constructor(private db: DbService, private router:Router) { }
 
   ngOnInit(): void {
     this.SignUpForm = new FormGroup({
@@ -37,8 +38,10 @@ export class SignUpComponent implements OnInit {
         console.log(res)
         if (res == null)
           alert("שגיאת שרת")
-        else
+        else{
           alert("ההתחברות הושלמה")
+          this.router.navigate(['category-list'])
+        }
       },
       error => {
         console.log("error: " + error.message);
