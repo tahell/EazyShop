@@ -84,6 +84,7 @@ h1{
     font-size: 46px;
     text-align: center;
     color: #2d3b3e;
+    
  
 }
 p{
@@ -119,4 +120,23 @@ footer{
 }
 h2{
       letter-spacing: 10px;
+}
+
+#buttonCatagory {
+    text-align: center;
+}
+
+#revach {
+    margin-bottom: 20px;
+}
+
+.item {
+    font-family: unset;
+    margin: 15px;
+    padding: 1%;
+    color: white;
+    font-weight: bold;
+    background-color: #647676;
+    border-color: aliceblue;
+
 }

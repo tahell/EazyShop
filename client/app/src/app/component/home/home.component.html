@@ -15,6 +15,14 @@
     All you have to do is enter your shopping list and we will create the shortest route for you.
   </p>
 </div>
+
+<div id="">
+  <input *ngFor="let category of allCategories " type="button" (click)="showProducts($event)" [id]="category.Class_Code" [value]="category.Class_Name.trim()"  class="btn btn-outline-info item">
+</div>
+
+<footer>
+  <h2>כל הזכויות שמורות לתהל לוי &copy;</h2>
+</footer>
 <!-- <div id="buttonCatagory">
 
   <input *ngFor="let category of allCategories " type="button" (click)="showProducts($event)" [id]="category.Class_Code" [value]="category.Class_Name.trim()"  class="btn btn-outline-info item"> -->
@@ -65,7 +73,7 @@
       <button id="item" type="button" class="btn btn-outline-info" value="55">לחמים</button>
       <button id="item" type="button" class="btn btn-outline-info" value="56">קפואים</button> -->
 
-<div id="buttonCatagory">
+<!-- <div id="buttonCatagory">
 
   <button id="item" type="button" class="btn btn-outline-info" value="23">אבקת כביסה </button>
   <button id="item" type="button" class="btn btn-outline-info" value="24">מרכך כביסה</button>
@@ -127,8 +135,5 @@
   <button id="item" type="button" class="btn btn-outline-info" value="51">ירקות</button>
   <button id="item" type="button" class="btn btn-outline-info" value="52">מוצרי חלב</button>
   <button id="item" type="button" class="btn btn-outline-info" value="53">שימורים</button>
-</div>
+</div> -->
 
-<footer>
-  <h2>כל הזכויות שמורות לתהל לוי &copy;</h2>
-</footer>

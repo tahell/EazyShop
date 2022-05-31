@@ -1,5 +1,7 @@
 .prod{
-    font-family:sans-serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+   font-size: 3%;
+   font-weight: 100;
 }
 
 .btn-warning{

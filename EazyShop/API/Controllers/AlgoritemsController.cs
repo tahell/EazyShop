@@ -21,7 +21,9 @@ namespace API.Controllers
         [HttpGet]
         public List<product_node> GetDTOWaze()
         {
-            return BL.Dijxtra.Dijxtra.CreateShortestRouteOnStore();
+            List<product_node> ln = new List<product_node>();
+            ln= BL.Dijxtra.Dijxtra.CreateShortestRouteOnStore();
+            return ln;
         }
 
         // POST: api/Algoritem
