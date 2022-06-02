@@ -3,6 +3,7 @@ import { DbService } from 'src/app/services/db.service';
 import { User } from 'src/app/model/User';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Signin } from 'src/app/model/Sign-in';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +13,7 @@ import { Signin } from 'src/app/model/Sign-in';
 export class SignInComponent implements OnInit {
   // SignIusernForm: any;
   SignInForm: any;
-  constructor(private db: DbService) { }
+  constructor(private db: DbService, private router:Router) { }
 
   ngOnInit(): void {
     this.SignInForm = new FormGroup({
@@ -38,6 +39,7 @@ export class SignInComponent implements OnInit {
         alert("שגיאת שרת")
       else
         alert("נוסף בהצלחה")
+        this.router.navigate(['category-list'])
     })
   }
 
