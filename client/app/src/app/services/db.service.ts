@@ -13,6 +13,7 @@ import { Product } from '../model/Product';
 })
 export class DbService {
 
+  public allProductsForCategory:Product[]=[]
   public allProducts:Product[]=[]
 
   constructor(private httpClient: HttpClient) { }

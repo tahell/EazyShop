@@ -1,0 +1,11 @@
+#list{
+    border: cadetblue 2px solid;
+    border-radius: 5%;
+    width: 400px;
+    height: 600px;
+    margin: 50px;
+}
+#bt{
+    background-color: cadetblue;
+    color:white;
+}

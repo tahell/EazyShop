@@ -10,14 +10,14 @@ import { DbService } from 'src/app/services/db.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  super="assets/super.png"
-  Bag="assets/Bag.png"
-  logo="assets/logo.png"
+  super = "assets/super.png"
+  Bag = "assets/Bag.png"
+  logo = "assets/logo.png"
   // superon="assets/"
   selectedCategory!: Category;
   allCategories: Category[] = []
-  allProductsToSelectedCategory:Product[]=[]
-  constructor(private db: DbService, private router:Router) { }
+  allProductsToSelectedCategory: Product[] = []
+  constructor(private db: DbService, private router: Router) { }
 
   ngOnInit(): void {
     this.db.getAllCategories().subscribe(
@@ -28,22 +28,20 @@ export class HomeComponent implements OnInit {
   }
 
 
-  showProducts(event:any) {
+  showProducts(event: any) {
 
     console.log(event.target.id)
 
-    this.selectedCategory=this.allCategories.filter(c=>c.Class_Code==event.target.id)[0];
+    this.selectedCategory = this.allCategories.filter(c => c.Class_Code == event.target.id)[0];
     console.log(this.selectedCategory);
-    
+
     // console.log(this.selectedCategory)
     this.db.getAllProducts(this.selectedCategory.Class_Code).subscribe(res => {
       this.allProductsToSelectedCategory = res;
 
-      this.db.allProducts=this.allProductsToSelectedCategory;
+      this.db.allProductsForCategory = this.allProductsToSelectedCategory;
       console.log(this.allProductsToSelectedCategory);
-this.router.navigate(['all-products'])
-      
-      
+      this.router.navigate(['all-products'])
     })
   }
 

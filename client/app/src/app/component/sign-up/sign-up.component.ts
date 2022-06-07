@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Signup } from 'src/app/model/Sign-Up';
 import { User } from 'src/app/model/User';
@@ -13,8 +13,13 @@ import { DbService } from 'src/app/services/db.service';
 })
 export class SignUpComponent implements OnInit {
   SignUpForm: any;
+  newTaskForm: FormGroup;
 
-  constructor(private db: DbService, private router:Router) { }
+  constructor(private db: DbService, private router:Router,fb: FormBuilder) { 
+    this.newTaskForm = fb.group({
+      name: ["", Validators.required]
+  });
+  }
 
   ngOnInit(): void {
     this.SignUpForm = new FormGroup({

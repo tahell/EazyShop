@@ -1,1 +1,4 @@
-<app-product *ngFor="let p of products" [myProduct]="p"></app-product>
+<div *ngFor="let p of products">
+    <app-product [myProduct]="p"></app-product>
+</div>
+<a href="#" routerLink="/list">Move your list</a>

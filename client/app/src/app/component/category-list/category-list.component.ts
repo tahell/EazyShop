@@ -39,7 +39,7 @@ export class CategoryListComponent implements OnInit {
     this.db.getAllProducts(this.selectedCategory.Class_Code).subscribe(res => {
       this.allProductsToSelectedCategory = res;
 
-      this.db.allProducts=this.allProductsToSelectedCategory;
+      this.db.allProductsForCategory=this.allProductsToSelectedCategory;
       console.log(this.allProductsToSelectedCategory);
 this.router.navigate(['all-products'])
       

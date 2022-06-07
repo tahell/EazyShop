@@ -14,7 +14,7 @@ import { AllProductsComponent } from './component/all-products/all-products.comp
 import { ProductComponent } from './component/product/product.component';
 import { RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
-import { TrackComponent } from './component/track/track.component';
+import { TrackComponent } from './track/track.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { TrackComponent } from './component/track/track.component';
     AllProductsComponent,
     ProductComponent,
     ListComponent,
-    TrackComponent,
+    TrackComponent
   ],
   imports: [
     BrowserModule,
