@@ -1,8 +1,23 @@
 
- <form FormGroup="SignUpForm">
+ <!-- <form FormGroup="SignUpForm">
     <label for="fn"> שם משתמש</label>
     <input formControlName="fn" class="form-control" type="text" id="fn">
     <label for="pass">סיסמא</label>
     <input formControlName="pass" class="form-control" type="text" id="pass">
     <input class="btn btn-primary" type="submit" value="התחברות" (click)="doSignUp()">
-</form>
+</form> -->
+
+<div class="container" style="margin-top: 3%;">
+    <form action="/action_page.php">
+      <label for="fn"> Name</label>
+      <input formControlName="fn" class="form-control" type="text" id="fn" name="firstname" placeholder="Your name..">
+  
+      <label for="pass">password</label>
+      <input formControlName="pass" class="form-control" type="text" id="pass" name="password" placeholder="Your password...">
+      <!-- <input type="submit" value="Submit"> -->
+      <br>
+      <div class="col-auto">
+        <input class="btn btn-primary" type="submit" value="התחברות" (click)="doSignUp()">
+      </div>
+    </form>
+  </div>

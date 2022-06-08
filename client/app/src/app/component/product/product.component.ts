@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit {
 
   addToCart() {
     this.db.allProducts.push(this.myProduct)
+    alert("המוצר נוסף בהצלחה")
   }
 
 }

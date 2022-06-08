@@ -1,5 +1,31 @@
-<div id="list">
+<!-- <div id="list">
 <div *ngFor="let p of list" class="prod">
     <p>{{p.Product_Name}}</p>
-</div>
-</div>
+</div> 
+</div> -->
+<div class="card" style="width: 18rem; height: 150px;border: silver solid 2px;
+margin-top: 50px;
+text-align: right;
+position: relative;
+display: flex;
+flex-direction: column;
+min-width: 0;
+word-wrap: break-word;
+background-color: #fff;
+background-clip: border-box;
+border: 1px solid rgba(0, 0, 0, 0.125);
+border-radius: 0.25rem;
+margin-left: 340px;
+/* margin-right: 20%; */
+">
+    <img src="assets/wow.png" class="card-img-top" alt="...">
+
+    <ul class="list-group list-group-flush" *ngFor="let p of list">
+      <li class="list-group-item">{{p.Product_Name}}
+      <li class="list-group-item">{{p.Price | currency:'ILS':"symbol"}}</li>
+    </ul>
+    <!-- <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div> -->
+  </div>
