@@ -67,6 +67,7 @@
     <Compile Include="ManagerUser.cs" />
     <Compile Include="models\loginForUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnionLists.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

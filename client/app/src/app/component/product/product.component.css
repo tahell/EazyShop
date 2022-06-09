@@ -5,17 +5,17 @@
     font-family: revert;
     font-weight: bold;
     border-radius: 5%;
-    border: rgb(87, 85, 85) solid 2px;
+    border: rgb(15, 15, 15) solid 2px;
     width: 200px;
-    color: rgb(87, 85, 85);
+    color: rgb(15, 15, 15);
     margin: 40px;
     padding: 25px;
 }
-.prod:hover
+/* .prod:hover
 {
     color: white;
     background-color: rgb(87, 85, 85);
-}
+} */
 .btn-warning
 {
     background-color: rgb(58 215 227);

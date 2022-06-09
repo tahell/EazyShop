@@ -61,7 +61,7 @@
 
 
 <div class="container">
-  <form action="/action_page.php">
+  <form [formGroup]="SignInForm" action="/action_page.php" >
     <label for="fn"> Name</label>
     <input formControlName="fn" class="form-control" type="text" id="fn" name="firstname" placeholder="Your name..">
 
@@ -76,7 +76,7 @@
 
     <!-- <input type="submit" value="Submit"> -->
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary" (click)="doSignIn()">הרשמה</button>
+      <button type="button" class="btn btn-primary" (click)="doSignIn()">הרשמה</button>
     </div>
   </form>
 </div>
