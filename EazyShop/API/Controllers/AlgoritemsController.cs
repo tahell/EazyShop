@@ -1,4 +1,5 @@
 ﻿using BL.Dijxtra;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,21 @@ namespace API.Controllers
         // GET: api/Algoritem/5
         [Route("api/Algoritems/GetDTOWaze")]
         [HttpGet]
-        public List<product_node> GetDTOWaze()
+        public void GetDTOWaze()
         {
-            List<product_node> ln = new List<product_node>();
-            ln= BL.Dijxtra.Dijxtra.CreateShortestRouteOnStore();
-            return ln;
+
+
+            DTOProduct milk = new DTOProduct() { Product_code = 5 };
+            DTOProduct kotege = new DTOProduct() { Product_code = 6 };
+            DTOProduct shampoo = new DTOProduct() { Product_code = 8 };
+            DTOProduct conditioner = new DTOProduct() { Product_code = 9 };
+            List<DTOProduct> list = new List<DTOProduct>();
+            list.Add(milk);
+            list.Add(kotege);
+            list.Add(shampoo);
+            list.Add(conditioner);
+            BL.BSD.Dijxtra.ConvertProductsToNodes(list);
+            return;
         }
 
         // POST: api/Algoritem
