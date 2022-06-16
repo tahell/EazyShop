@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BSD\algoritem.cs" />
     <Compile Include="BSD\Algorithm.cs" />
     <Compile Include="BSD\Queue.cs" />
     <Compile Include="BSD\Route.cs" />

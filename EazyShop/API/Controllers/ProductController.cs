@@ -10,7 +10,23 @@ namespace API.Controllers
 {
     public class ProductController : ApiController
     {
-        
+
+
+
+        public List<DTONodes> GetChoiceProduct(List<DTOProduct> prod)
+        {
+            List<DTONodes> nodes = new List<DTONodes>();
+            //foreach (var n in prod)
+            //{
+            //    int coliom = n.Kod_Column;
+
+            //    if ()
+            //}
+            return nodes;
+        }
+
+     
+
         [Route("api/Products/GetProducts")]
         [HttpGet]
         // GET: api/Product

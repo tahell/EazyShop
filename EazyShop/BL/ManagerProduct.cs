@@ -11,12 +11,48 @@ namespace BL
     public static class ManagerProduct
     {
         static DBConection db = new DBConection();
+
+
+
+        public static void GetChoiceProduct(List<DTOProduct> prod)
+        {
+            List<DTONodes> nodes = new List<DTONodes>();
+            foreach (var n in prod)
+            {
+                int coliom = n.Kod_Column;
+                DTOColumns lineCOL = db.GetDbSet<DTOColumns>().FirstOrDefault(s => s.Kod_Column == coliom);
+                int codeTor = (int)(lineCOL.Kod_Transition);
+                DTOTranition lineTOR = db.GetDbSet<DTOTranition>().FirstOrDefault(s => s.Kod_Transition == codeTor);
+
+                using (EazyShopEntities db = new EazyShopEntities())
+                {
+                    List<Products> dbProductsList = new List<Products>();
+                    foreach (var p in prod)
+                    {
+                        Products dbProduct = db.GetDbSet<Products>().FirstOrDefault(p1 => p1.Product_Code == p.Product_code);
+                        dbProductsList.Add(dbProduct);
+                    }
+                    //סינון לפי  סוג צומת
+                    var startNodesProducts = dbProductsList.Where(p => p.Columns.Start == 1);
+
+                    var endNodeProducts = dbProductsList.Where(p => p.Columns.Start == 0);
+
+                    //קיבוץ רשימת מצרים לפי צומת
+                    var groupedStarts = startNodesProducts.GroupBy(p => p.Columns.Transition.Start_Kod);
+                    var groupedEnds = startNodesProducts.GroupBy(p => p.Columns.Transition.End_Kod);
+
+                }
+
+            }
+           
+        }
         public static List<DTOProduct> GetProducts()
         {
             List<Products> list = db.GetDbSet<Products>().ToList();
             List<DTOProduct> dtolist = DTOProduct.CreatDtoList(list);
             return dtolist;
         }
+
 
     //    public List<Products> MargetoLists(List<DTOProduct> a, List<DTOProduct> b)
     //    {

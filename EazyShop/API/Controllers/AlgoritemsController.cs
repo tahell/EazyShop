@@ -33,7 +33,7 @@ namespace API.Controllers
             list.Add(kotege);
             list.Add(shampoo);
             list.Add(conditioner);
-            BL.BSD.Dijxtra.ConvertProductsToNodes(list);
+          //  BL.Algoritm.PassingNodes();
             return;
         }
 
