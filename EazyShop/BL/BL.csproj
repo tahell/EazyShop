@@ -55,6 +55,7 @@
     <Compile Include="BSD\Algorithm.cs" />
     <Compile Include="BSD\Queue.cs" />
     <Compile Include="BSD\Route.cs" />
+    <Compile Include="BSD\Vertax.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Dijxtra\Algorithm.cs" />
     <Compile Include="Dijxtra\Dijxtra.cs" />

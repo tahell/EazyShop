@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DbService } from 'src/app/services/db.service';
@@ -68,19 +69,23 @@ export class TrackComponent implements OnInit {
   }
 
   drawStores(): void {
-    this.ctx.drawImage(this.img, 0, 0);
+    this.ctx.drawImage(this.img, 0, 0 );
+    
   }
   drawPath(): void {
-    // this.ctx.beginPath();
-    // this.ctx.moveTo(this.calcPointXToCanvas(this.shortestPath[0].xPoint!), this.calcPointYToCanvas(this.shortestPath[0].yPoint!));
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.calcPointYToCanvas(2),this.calcPointXToCanvas(8));
+  
+     this.ctx.lineTo(this.calcPointYToCanvas(10),this.calcPointXToCanvas(5));
+    // (this.calcPointXToCanvas(this.shortestPath[0].xPoint!), this.calcPointYToCanvas(this.shortestPath[0].yPoint!));
     // for (let i = 1; i < this.shortestPath.length; i++) {
     //   const point = this.shortestPath[i];
     //   this.ctx.lineTo(this.calcPointXToCanvas(point.xPoint!), this.calcPointYToCanvas(point.yPoint!))
-    // console.log(this.calcPointXToCanvas(point.xPoint!), this.calcPointYToCanvas(point.yPoint!));
+    // console.log(this.calcPointXToCanvas(8), this.calcPointYToCanvas(2));
     // }
-    // this.ctx.strokeStyle = 'red';
-    // this.ctx.storkeWidth = 10;
-    // this.ctx.stroke();
+    this.ctx.strokeStyle = 'red';
+    this.ctx.storkeWidth = 10;
+     this.ctx.stroke();
   }
 
 

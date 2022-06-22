@@ -13,8 +13,10 @@ import { AboutComponent } from './about/about.component';
 import { AllProductsComponent } from './component/all-products/all-products.component';
 import { ProductComponent } from './component/product/product.component';
 import { RouterModule } from '@angular/router';
-import { ListComponent } from './list/list.component';
+
 import { TrackComponent } from './component/track/track.component';
+import { ListComponent } from './component/list/list.component';
+import { DbService } from './services/db.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { TrackComponent } from './component/track/track.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DbService],
   bootstrap: [AppComponent],
   exports: [RouterModule],
 

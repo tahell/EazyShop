@@ -9,6 +9,7 @@ namespace DTO
 {
      public class DTONodes
     {
+        public DTONodes PreviousNode { get; set; }
         public int Node_Kod { get; set; }
         public string Name_Node { get; set; }
         public int Value_X { get; set; }

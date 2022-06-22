@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="EazyShopModel.Columns" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EazyShopModel.Department" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EazyShopModel.Location" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Nodes" Width="1.5" PointX="3.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EazyShopModel.Products" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Nodes" Width="1.5" PointX="6.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EazyShopModel.Products" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EazyShopModel.Products_for_lists" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EazyShopModel.Reserved_lists" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EazyShopModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />

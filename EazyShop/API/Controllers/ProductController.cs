@@ -1,9 +1,11 @@
 ﻿using DTO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace API.Controllers
@@ -45,6 +47,18 @@ namespace API.Controllers
             return "value";
         }
 
+        [Route("api/Products/GetNodes")]
+        [HttpPost]
+
+        // GET: api/Product/5
+        public bool GetNodes()
+        {
+            List<DTOProduct> products = new List<DTOProduct>();
+
+           products = JsonConvert.DeserializeObject<List<DTOProduct>>(HttpContext.Current.Request["allProducts"]);
+
+            return true;
+        }
         // POST: api/Product
         public void Post([FromBody]string value)
         {

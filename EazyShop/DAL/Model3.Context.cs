@@ -35,7 +35,6 @@ namespace DAL
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Transition> Transition { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-
         public DbSet<T> GetDbSet<T>() where T : class
         {
             return this.Set<T>();
