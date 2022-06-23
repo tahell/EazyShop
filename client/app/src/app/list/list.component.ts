@@ -20,10 +20,11 @@ export class ListComponent implements OnInit {
 
     this.db.calcPathToProduct().subscribe((res) => {
       console.log(res);
-      
+      this.db.myPath = res;
+      this.router.navigate(['track']);
 
     });
-    // this.router.navigate(['track'])
+    // 
   }
 
 }

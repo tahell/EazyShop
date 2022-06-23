@@ -7,9 +7,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+
     public class ProductController : ApiController
     {
 
@@ -51,13 +54,14 @@ namespace API.Controllers
         [HttpPost]
 
         // GET: api/Product/5
-        public bool GetNodes()
+        public List<BL.Algorithm.Node> GetNodes()
         {
             List<DTOProduct> products = new List<DTOProduct>();
 
            products = JsonConvert.DeserializeObject<List<DTOProduct>>(HttpContext.Current.Request["allProducts"]);
-
-            return true;
+            BL.Algorithm.Algorithm dijxtra = new BL.Algorithm.Algorithm();
+            return dijxtra.FindPath(products);
+            
         }
         // POST: api/Product
         public void Post([FromBody]string value)

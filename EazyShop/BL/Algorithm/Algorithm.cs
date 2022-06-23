@@ -66,6 +66,8 @@ namespace BL.Algorithm
                 start = minDistancePath[minDistancePath.Count - 1];
                 foreach (var n in minDistancePath)
                 {
+                    n.PreviousNode = null;
+                    n.Value = 0;
                     finalRealPath.Add(n);
                 }
             }

@@ -15,7 +15,7 @@ export class DbService {
 
   public allProductsForCategory: Product[] = []
   public allProducts: Product[] = []
-
+  public myPath: any[] = []
   constructor(private httpClient: HttpClient) { }
   SignIn(signup: Signup): Observable<Signin> {
     return this.httpClient.post<Signin>("http://localhost:51399/api/user/RegisterUser", signup)
@@ -33,12 +33,12 @@ export class DbService {
   }
 
 
-  calcPathToProduct(): Observable<boolean> {
+  calcPathToProduct(): Observable<any[]> {
     let data = new FormData();
-    let val=JSON.stringify(this.allProducts);
+    let val = JSON.stringify(this.allProducts);
     console.log(val)
-    data.append('allProducts',val )
-    return this.httpClient.post<boolean>("http://localhost:51399/api/Products/GetNodes", data)
+    data.append('allProducts', val)
+    return this.httpClient.post<any[]>("http://localhost:51399/api/Products/GetNodes", data)
 
   }
 }
