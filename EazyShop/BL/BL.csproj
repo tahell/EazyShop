@@ -51,24 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BSD\algoritem.cs" />
-    <Compile Include="BSD\Algorithm.cs" />
-    <Compile Include="BSD\Queue.cs" />
-    <Compile Include="BSD\Route.cs" />
-    <Compile Include="BSD\Vertax.cs" />
+    <Compile Include="Algorithm\Algorithm.cs" />
+    <Compile Include="Algorithm\PrioQueue.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="Dijxtra\Algorithm.cs" />
-    <Compile Include="Dijxtra\Dijxtra.cs" />
-    <Compile Include="Dijxtra\DikjstraModels.cs" />
-    <Compile Include="Dijxtra\Queue.cs" />
-    <Compile Include="Dijxtra\Route.cs" />
-    <Compile Include="Dijxtra\Tsp.cs" />
     <Compile Include="ManagerDepartment.cs" />
     <Compile Include="ManagerLocation.cs" />
     <Compile Include="ManagerProduct.cs" />
     <Compile Include="ManagerProductForList.cs" />
     <Compile Include="ManagerReservedList.cs" />
-    <Compile Include="ManagerTsp.cs" />
     <Compile Include="ManagerUser.cs" />
     <Compile Include="models\loginForUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

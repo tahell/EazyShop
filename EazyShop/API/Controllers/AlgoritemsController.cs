@@ -1,4 +1,4 @@
-﻿using BL.Dijxtra;
+﻿using BL.Algorithm;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -18,23 +18,24 @@ namespace API.Controllers
         }
 
         // GET: api/Algoritem/5
-        [Route("api/Algoritems/GetDTOWaze")]
+        [Route("api/Algorithm/GetDTOWaze")]
         [HttpGet]
-        public void GetDTOWaze()
+        public List<Node> GetDTOWaze()
         {
 
 
-            DTOProduct milk = new DTOProduct() { Product_code = 5 };
-            DTOProduct kotege = new DTOProduct() { Product_code = 6 };
+            DTOProduct cola = new DTOProduct() { Product_code = 68 };
+            DTOProduct RC = new DTOProduct() { Product_code = 69 };
             DTOProduct shampoo = new DTOProduct() { Product_code = 8 };
             DTOProduct conditioner = new DTOProduct() { Product_code = 9 };
             List<DTOProduct> list = new List<DTOProduct>();
-            list.Add(milk);
-            list.Add(kotege);
+            list.Add(cola);
+            list.Add(RC);
             list.Add(shampoo);
             list.Add(conditioner);
-          //  BL.Algoritm.PassingNodes();
-            return;
+            Algorithm a = new Algorithm();
+           return  a.FindPath(list);
+           
         }
 
         // POST: api/Algoritem
