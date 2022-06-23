@@ -6,8 +6,10 @@ import { CategoryListComponent } from './component/category-list/category-list.c
 import { HomeComponent } from './component/home/home.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
-import { ListComponent } from './component/list/list.component';
+import { ListComponent } from './list/list.component';
 import { TrackComponent } from './component/track/track.component';
+
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +21,9 @@ const routes: Routes = [
   { path: 'list', component: ListComponent },
   { path: 'all-products', component: AllProductsComponent },
   { path: 'track', component: TrackComponent }
+
+
+  
 
 ];
 

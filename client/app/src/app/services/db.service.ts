@@ -21,8 +21,8 @@ export class DbService {
     return this.httpClient.post<Signin>("http://localhost:51399/api/user/RegisterUser", signup)
   }
 
-  SignUp(signIn: Signin): Observable<string> {
-    return this.httpClient.post<string>("http://localhost:51399/api/User/LoginUser", signIn)
+  SignUp(signIn: Signin): Observable<Signin> {
+    return this.httpClient.post<Signin>("http://localhost:51399/api/User/LoginUser", signIn)
   }
 
   getAllProducts(CatClass: number) {

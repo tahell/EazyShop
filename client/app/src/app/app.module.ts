@@ -15,8 +15,10 @@ import { ProductComponent } from './component/product/product.component';
 import { RouterModule } from '@angular/router';
 
 import { TrackComponent } from './component/track/track.component';
-import { ListComponent } from './component/list/list.component';
+import { ListComponent } from './list/list.component';
 import { DbService } from './services/db.service';
+
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { DbService } from './services/db.service';
     ProductComponent,
     ListComponent,
     TrackComponent
+    
+ 
   ],
   imports: [
     BrowserModule,

@@ -13,12 +13,12 @@ import { DbService } from 'src/app/services/db.service';
 })
 export class SignUpComponent implements OnInit {
   SignUpForm: any;
-  newTaskForm: FormGroup;
+  // newTaskForm: FormGroup;
 
   constructor(private db: DbService, private router:Router,fb: FormBuilder) { 
-    this.newTaskForm = fb.group({
-      name: ["", Validators.required]
-  });
+  //   this.newTaskForm = fb.group({
+  //     name: ["", Validators.required]
+  // });
   }
 
   ngOnInit(): void {

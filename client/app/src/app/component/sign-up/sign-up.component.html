@@ -8,12 +8,12 @@
 </form> -->
 
 <div class="container" style="margin-top: 3%;">
-    <form action="/action_page.php">
+    <form [formGroup]="SignUpForm" action="/action_page.php">
       <label for="fn"> Name</label>
-      <input formControlName="fn" class="form-control" type="text" id="fn" name="firstname" placeholder="Your name..">
+      <input formControlName="fn" class="form-control" type="text" id="fn"  placeholder="Your name..">
   
       <label for="pass">password</label>
-      <input formControlName="pass" class="form-control" type="text" id="pass" name="password" placeholder="Your password...">
+      <input formControlName="pass" class="form-control" type="text" id="pass"  placeholder="Your password...">
       <!-- <input type="submit" value="Submit"> -->
       <br>
       <div class="col-auto">

@@ -1,7 +1,11 @@
 import { style } from '@angular/animations';
+import { Location } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Locations } from 'src/app/model/Locations';
 import { DbService } from 'src/app/services/db.service';
+
+
 
 @Component({
   selector: 'app-track',
@@ -9,32 +13,22 @@ import { DbService } from 'src/app/services/db.service';
   styleUrls: ['./track.component.css'],
 
 })
-
-
-
-
 export class TrackComponent implements OnInit {
 
-
   imageObj = new Image();
-  imageName = "assets/map.png";
+  imageName = "assets/מפה.png";
 
-
+  shortestPath:Locations[]=[new Locations(2,26),new Locations(3,4)];
   @ViewChild('canvas', { static: true })
   canvas: any;
   @ViewChild('img', { static: true })
   img: any;
   private ctx: any;
 
-  // option:any;
-  // shortestPath: StoreWithLocation[];
-
   constructor(private router: Router, private dbService: DbService) {
     const x = this.router.getCurrentNavigation();
-    //console.log(x?.extras.state?.list); // should log out 'bar'
-    // this.shortestPath = dbService.currentPath;
+    // console.log(x?.extras.state?.list); // should log out 'bar'
 
-    // console.log(this.shortestPath);
   }
 
   calcPointXToCanvas(x: number) {
@@ -50,6 +44,13 @@ export class TrackComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  
+    // this.shortestPath[0]=new Locations(2,26);
+    // this.shortestPath[1]=new Locations(3,4);
+    // this.shortestPath[2]=new Locations(5,2);
+    // this.shortestPath[4]=new Locations(4,2);
+
+   
 
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.imageObj.src = this.imageName;
@@ -73,23 +74,18 @@ export class TrackComponent implements OnInit {
     
   }
   drawPath(): void {
+
     this.ctx.beginPath();
-    this.ctx.moveTo(this.calcPointYToCanvas(2),this.calcPointXToCanvas(8));
-  
-     this.ctx.lineTo(this.calcPointYToCanvas(10),this.calcPointXToCanvas(5));
-    // (this.calcPointXToCanvas(this.shortestPath[0].xPoint!), this.calcPointYToCanvas(this.shortestPath[0].yPoint!));
-    // for (let i = 1; i < this.shortestPath.length; i++) {
-    //   const point = this.shortestPath[i];
-    //   this.ctx.lineTo(this.calcPointXToCanvas(point.xPoint!), this.calcPointYToCanvas(point.yPoint!))
-    // console.log(this.calcPointXToCanvas(8), this.calcPointYToCanvas(2));
-    // }
-    this.ctx.strokeStyle = 'red';
+    this.ctx.moveTo(this.calcPointXToCanvas(this.shortestPath[0].Value_X!), this.calcPointYToCanvas(this.shortestPath[0].Value_Y!));
+    for (let i = 1; i < this.shortestPath.length; i++) {
+      const point = this.shortestPath[i];
+      this.ctx.lineTo(this.calcPointXToCanvas(point.Value_X!), this.calcPointYToCanvas(point.Value_Y!))
+    console.log(this.calcPointXToCanvas(point.Value_X!), this.calcPointYToCanvas(point.Value_Y!));
+    }
+    this.ctx.strokeStyle = 'green';
     this.ctx.storkeWidth = 10;
-     this.ctx.stroke();
+    this.ctx.stroke();
   }
-
-
-
 
 }
 
