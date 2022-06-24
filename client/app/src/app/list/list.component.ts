@@ -10,12 +10,19 @@ import { DbService } from '../services/db.service';
 })
 export class ListComponent implements OnInit {
   list: Array<Product> = new Array<Product>()
+  isCollector = false;
+
   constructor(private db: DbService, private router: Router) { }
 
   ngOnInit(): void {
     this.list = this.db.allProducts;
+    this.isCollector = this.db.isCollector;
   }
+  doalert(){
+    alert("הרשימה נוספה בהצלחה")
 
+    this.router.navigate(['home'])
+  }
   goTo() {
 
     this.db.calcPathToProduct().subscribe((res) => {

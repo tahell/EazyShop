@@ -69,9 +69,9 @@
     <input formControlName="pass" class="form-control" type="text" id="pass" name="password" placeholder="Your password...">
 
     <label for="country">Choose</label>
-    <select id="country" name="country">
-      <option value="australia">Customer</option>
-      <option value="canada">Collector</option>
+    <select id="country" name="country" #t (change)="checkCollector(t.value)">
+      <option value="Customer">Customer</option>
+      <option value="Collector">Collector</option>
     </select>
 
     <!-- <input type="submit" value="Submit"> -->

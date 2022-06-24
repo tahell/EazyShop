@@ -1,5 +1,23 @@
+<canvas #canvas width="400" height="300"></canvas>
+<table class="table table-hover myTable">
+    <thead>
+        <tr>
+            <th>קוד מוצר</th>
+            <th>שם מוצר</th>
+            <th>מחיר</th>
+        </tr>
 
- <canvas #canvas width="600" height="300"></canvas>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let p of productList">
+            <td>{{p.Product_code}}</td>
+
+            <td>{{p.Product_Name}}</td>
+            <td>{{p.Price | currency:'ILS':"symbol"}}</td>
+        </tr>
+    </tbody>
+</table>
 <!-- <button (click)="drawPath()">draw</button> -->
 
 <!-- <img src="assets/map.png" alt=""  width="600" height="300" > -->

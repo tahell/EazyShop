@@ -1,0 +1,10 @@
+.myTable{
+    display: inline-block;
+    direction: rtl;
+    width: 50%;
+}
+
+canvas{
+    width: 50%;
+    display: inline-block;
+}

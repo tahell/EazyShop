@@ -6,6 +6,7 @@ import { Signup } from '../model/Sign-Up';
 import { Signin } from '../model/Sign-in'
 import { Category } from '../model/Category';
 import { Product } from '../model/Product';
+import { Nodes } from '../model/nodes';
 
 
 @Injectable({
@@ -13,9 +14,11 @@ import { Product } from '../model/Product';
 })
 export class DbService {
 
-  public allProductsForCategory: Product[] = []
-  public allProducts: Product[] = []
-  public myPath: any[] = []
+   allProductsForCategory: Product[] = []
+   allProducts: Product[] = []
+   myPath: Nodes[] = new Array<Nodes>();
+
+   isCollector=false;
   constructor(private httpClient: HttpClient) { }
   SignIn(signup: Signup): Observable<Signin> {
     return this.httpClient.post<Signin>("http://localhost:51399/api/user/RegisterUser", signup)
@@ -33,12 +36,12 @@ export class DbService {
   }
 
 
-  calcPathToProduct(): Observable<any[]> {
+  calcPathToProduct(): Observable<Nodes[]> {
     let data = new FormData();
     let val = JSON.stringify(this.allProducts);
     console.log(val)
     data.append('allProducts', val)
-    return this.httpClient.post<any[]>("http://localhost:51399/api/Products/GetNodes", data)
+    return this.httpClient.post<Nodes[]>("http://localhost:51399/api/Products/GetNodes", data)
 
   }
 }
