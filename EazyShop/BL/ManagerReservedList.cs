@@ -11,7 +11,7 @@ namespace BL
     public static class ManagerReservedList
     {
         static DBConection db = new DBConection();
-        public static List<DTOReservedList> GetReserved_lists()
+        public static List<Products> GetReserved_lists()
         {
             using (EazyShopEntities db = new EazyShopEntities())
             {
@@ -77,13 +77,35 @@ namespace BL
                         break;
                 }
 
-                //Reserved_lists list1 = db.GetDbSet<Reserved_lists>().FirstOrDefault();
-                //    Reserved_lists list2 = 
-                //שליפה של רשימות בעלות קוד זהה ושליפת המוצרים ואיחוד הרשימות
-
-                return null;
+                Reserved_lists list1 = db.GetDbSet<Reserved_lists>().FirstOrDefault(s => s.List_code == l1);
+                 Reserved_lists list2 =db.GetDbSet<Reserved_lists>().FirstOrDefault(s => s.List_code ==l2);
+               List<Products_for_lists> p1 = db.GetDbSet<Products_for_lists>().Where(p => p.Kod_List == list1.List_code).ToList();
+                List<Products_for_lists> p2 = db.GetDbSet<Products_for_lists>().Where(p => p.Kod_List == list2.List_code).ToList();
+                
+                List<int> allLists = new List<int>();
+                foreach(var prod in p1)
+                {
+                    allLists.Add(prod.Product_Code);
+                }
+                foreach (var prod in p2)
+                {
+                    allLists.Add(prod.Product_Code);
+                }
+                List<Products> unionLists = new List<Products>();
+               
+                foreach (var l in allLists)
+                {
+                    Products AllProduct = db.GetDbSet<Products>().Where(pro=>pro.Product_Code==l).Single();
+                    unionLists.Add(AllProduct);
+                }
+               
+                return unionLists;
             }
+            
+
+
         }
+        
 
         public static Columns FindColForProd(Products p)
         {
