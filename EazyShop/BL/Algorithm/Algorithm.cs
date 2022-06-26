@@ -10,9 +10,7 @@ namespace BL.Algorithm
 {
     public class Algorithm
     {
-
         DBConection db = new DBConection();
-
         //גרף ורשימת צמתים למסלול
         Graph super = new Graph();
         List<Node> passNodes = new List<Node>();
@@ -20,8 +18,6 @@ namespace BL.Algorithm
 
         public List<Node> FindPath(List<DTOProduct> products)
         {
-
-
             InitGraph();
             InitPassNodes(products);
 
@@ -37,12 +33,12 @@ namespace BL.Algorithm
             {
              
                    minDistance = double.MaxValue;
-                foreach (Node n in passNodes)                      //נרצה להגיע לאחד מהצמתים האחרים שרוצים לעבור בהם
+                foreach (Node n in passNodes)      //נרצה להגיע לאחד מהצמתים האחרים שרוצים לעבור בהם
                 {
                     if (n.Id != start.Id)
                     {
                         PrepareDijxtra(ref start, ref queue, ref unvisited);
-                        ;
+                        
                         end = n;
 
                         double distance = MakeDijxtra(queue, unvisited, start, end); //נבדוק האם הצומת הנוכחית היא הכי קרובה לצומת ההתחלה
