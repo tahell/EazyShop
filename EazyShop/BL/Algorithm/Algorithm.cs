@@ -75,13 +75,14 @@ namespace BL.Algorithm
 
 
         }
-
+        //אתחול הגרף
         public void InitGraph()
         {
             List<Nodes> nodes;
             List<Route> routes;
             nodes = db.GetDbSet<Nodes>().ToList();
             routes = CreateRouteForNodes();
+            //עובר על כל הצמתים של כל הסופר
             foreach (var n in nodes)
             {
                 Node dictNode = new Node(n.Node_Kod, (int)n.Value_X, (int)n.Value_Y);
@@ -89,7 +90,7 @@ namespace BL.Algorithm
             }
             super.Routes = routes;
         }
-
+        //ממיר בין מוצרים לצמתים 
         public void InitPassNodes(List<DTOProduct> userProduct)
         {
             List<Products> productsList = new List<Products>();
@@ -102,15 +103,17 @@ namespace BL.Algorithm
                 }
 
                 List<Node> nodesList = new List<Node>();
-
+                //צומת הראשונה - הכניסה לסופר
                 Nodes start = db.GetDbSet<Nodes>().FirstOrDefault();
 
                 nodesList.Add(new Node(start.Node_Kod, (int)start.Value_X, (int)start.Value_Y));
 
                 foreach (var p in productsList)
-                {
+                {   //מסוג הטבלה 
                     Nodes node;
+                   //מסוג המחלקה של האלגוריתם
                     Node dictNode;
+                    //בודק  האם המוצר בתחילת הטור 
                     if (p.Columns.Start == 1)
                     {
                         node = p.Columns.Transition.Nodes;
@@ -130,7 +133,7 @@ namespace BL.Algorithm
             }
 
         }
-
+        //פונקצית עזר לחישוב מרחקים בין הצמתים
         public List<Route> CreateRouteForNodes()
         {
             List<Route> rList = new List<Route>();
